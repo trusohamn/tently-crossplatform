@@ -1,4 +1,4 @@
-package com.first.generated;
+package com.tently.generated;
 
 import java.util.Arrays;
 import java.util.List;

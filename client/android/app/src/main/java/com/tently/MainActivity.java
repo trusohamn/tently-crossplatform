@@ -1,4 +1,4 @@
-package com.first;
+package com.tently;
 
 import android.os.Bundle;
 

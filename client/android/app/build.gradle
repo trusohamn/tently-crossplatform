@@ -131,7 +131,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.first"
+        applicationId "com.tently"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
