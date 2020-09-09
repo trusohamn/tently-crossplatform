@@ -1,2 +1,2 @@
-export * from "./index.native";
-export * from "./index.web";
+export { default } from "./index.native";
+export { default } from "./index.web";

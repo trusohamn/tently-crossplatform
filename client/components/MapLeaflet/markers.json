@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "position": { "lat": 59.5, "lng": 18.0 },
+    "icon": "https://www.catster.com/wp-content/uploads/2018/07/Savannah-cat-long-body-shot.jpg",
+    "size": [32, 32]
+  },
+  {
+    "id": "2",
+    "position": { "lat": 59.54, "lng": 18.04 },
+    "icon": "https://www.catster.com/wp-content/uploads/2018/07/Savannah-cat-long-body-shot.jpg",
+    "size": [32, 32]
+  },
+  {
+    "id": "3",
+    "position": { "lat": 59.59, "lng": 18.09 },
+    "icon": "https://www.catster.com/wp-content/uploads/2018/07/Savannah-cat-long-body-shot.jpg",
+    "size": [32, 32]
+  }
+]

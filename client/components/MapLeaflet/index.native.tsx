@@ -6,6 +6,7 @@ import {
 } from "react-native-webview-leaflet";
 import { View, StyleSheet, Alert } from "react-native";
 import { useMapLeaflet } from "./hooks";
+import markers from "./markers.json";
 
 type LatLngObject = { lat: number; lng: number };
 
@@ -43,6 +44,7 @@ export default () => {
             url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
           },
         ]}
+        mapMarkers={markers}
         mapCenterPosition={mapCenterPosition}
         zoom={zoom}
       ></WebViewLeaflet>
