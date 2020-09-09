@@ -2,13 +2,13 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import Hello from "./components/Hello";
+import MapLeaflet from "./components/MapLeaflet";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Hello hello!!!</Text>
-      <Hello></Hello>
+      <Text>Hello Tently!!!</Text>
+      <MapLeaflet></MapLeaflet>
       <StatusBar style="auto" />
     </View>
   );
