@@ -5,13 +5,14 @@ import {
   WebviewLeafletMessage,
 } from "react-native-webview-leaflet";
 import { View, StyleSheet, Alert } from "react-native";
+import { useMapLeaflet } from "./hooks";
 
 type LatLngObject = { lat: number; lng: number };
 
 const onMessageReceived = (message: WebviewLeafletMessage) => {
   switch (message.event) {
     case WebViewLeafletEvents.ON_MAP_TOUCHED:
-      const position: LatLngObject = message?.payload?.touchLatLng;
+      const position = message?.payload?.touchLatLng as LatLngObject;
       Alert.alert(`Map Touched at:`, `${position.lat}, ${position.lng}`);
       break;
     default:
@@ -20,11 +21,11 @@ const onMessageReceived = (message: WebviewLeafletMessage) => {
 };
 
 export default () => {
-  const [webViewLeafletRef, setWebViewLeafletRef] = useState(null);
-  const [mapCenterPosition, setMapCenterPosition] = useState({
-    lat: 59.5,
-    lng: 18.0,
-  });
+  const { mapCenterPosition, zoom } = useMapLeaflet();
+  const [
+    webViewLeafletRef,
+    setWebViewLeafletRef,
+  ] = useState<WebViewLeaflet | null>(null);
 
   return (
     <View style={styles.container}>
@@ -33,7 +34,6 @@ export default () => {
         ref={(ref: WebViewLeaflet) => {
           setWebViewLeafletRef(ref);
         }}
-        backgroundColor={"green"}
         mapLayers={[
           {
             attribution:
@@ -44,6 +44,7 @@ export default () => {
           },
         ]}
         mapCenterPosition={mapCenterPosition}
+        zoom={zoom}
       ></WebViewLeaflet>
     </View>
   );

@@ -1,33 +1,22 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Map as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
-import "../../App.css";
+import "./MapLeaflet.css";
+import { useMapLeaflet } from "./hooks";
 
-class SimpleExample extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      lat: 51.505,
-      lng: -0.09,
-      zoom: 13,
-    };
-  }
+export default () => {
+  const { mapCenterPosition, zoom } = useMapLeaflet();
 
-  render() {
-    const position = [this.state.lat, this.state.lng];
-    return (
-      <LeafletMap center={position} zoom={this.state.zoom}>
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={position}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-      </LeafletMap>
-    );
-  }
-}
-
-export default SimpleExample;
+  return (
+    <LeafletMap center={mapCenterPosition} zoom={zoom}>
+      <TileLayer
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+      />
+      <Marker position={mapCenterPosition}>
+        <Popup>
+          Popup <br /> description.
+        </Popup>
+      </Marker>
+    </LeafletMap>
+  );
+};
