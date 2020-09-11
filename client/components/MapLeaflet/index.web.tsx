@@ -4,6 +4,7 @@ import "./MapLeaflet.css";
 import { useMapLeaflet } from "./hooks";
 import markers from "./markers.json";
 import { Icon } from "leaflet";
+import camp from "../../assets/icons/012-camp.svg";
 
 export default () => {
   const { mapCenterPosition, zoom } = useMapLeaflet();
@@ -17,7 +18,12 @@ export default () => {
       {markers.map((marker) => (
         <Marker
           position={marker.position}
-          icon={new Icon({ iconUrl: marker.icon, iconSize: marker.size })}
+          icon={
+            new Icon({
+              iconUrl: camp,
+              iconSize: marker.size,
+            })
+          }
         >
           <Popup>
             Popup <br /> description.

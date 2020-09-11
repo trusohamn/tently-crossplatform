@@ -4,9 +4,10 @@ import {
   WebViewLeafletEvents,
   WebviewLeafletMessage,
 } from "react-native-webview-leaflet";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, Image } from "react-native";
 import { useMapLeaflet } from "./hooks";
 import markers from "./markers.json";
+import camp from "../../assets/icons/012-camp.png";
 
 type LatLngObject = { lat: number; lng: number };
 
@@ -27,7 +28,7 @@ export default () => {
     webViewLeafletRef,
     setWebViewLeafletRef,
   ] = useState<WebViewLeaflet | null>(null);
-
+  const exampleImageUri = Image.resolveAssetSource(camp).uri;
   return (
     <View style={styles.container}>
       <WebViewLeaflet
@@ -44,7 +45,10 @@ export default () => {
             url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
           },
         ]}
-        mapMarkers={markers}
+        mapMarkers={markers.map((marker) => ({
+          ...marker,
+          icon: exampleImageUri,
+        }))}
         mapCenterPosition={mapCenterPosition}
         zoom={zoom}
       ></WebViewLeaflet>

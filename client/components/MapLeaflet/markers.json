@@ -14,7 +14,7 @@
   {
     "id": "3",
     "position": { "lat": 59.59, "lng": 18.09 },
-    "icon": "https://www.catster.com/wp-content/uploads/2018/07/Savannah-cat-long-body-shot.jpg",
+    "icon": "./012-camp.svg",
     "size": [32, 32]
   }
 ]
