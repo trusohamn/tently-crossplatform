@@ -6,10 +6,8 @@ import {
 } from "react-native-webview-leaflet";
 import { View, StyleSheet, Alert, Image } from "react-native";
 import { useMapLeaflet } from "./hooks";
-import markers from "./markers.json";
 import camp from "../../assets/icons/012-camp.png";
-
-type LatLngObject = { lat: number; lng: number };
+import { LatLngObject } from "./types";
 
 const onMessageReceived = (message: WebviewLeafletMessage) => {
   switch (message.event) {
@@ -22,7 +20,7 @@ const onMessageReceived = (message: WebviewLeafletMessage) => {
   }
 };
 
-export default () => {
+export default ({ markers }) => {
   const { mapCenterPosition, zoom } = useMapLeaflet();
   const [
     webViewLeafletRef,

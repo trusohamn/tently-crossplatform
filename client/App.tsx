@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import markers from "./mock/markers.json";
 
 import MapLeaflet from "./components/MapLeaflet";
 
@@ -8,7 +9,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Welcome to Tently!</Text>
-      <MapLeaflet></MapLeaflet>
+      <MapLeaflet markers={markers}></MapLeaflet>
       <StatusBar style="auto" />
     </View>
   );
