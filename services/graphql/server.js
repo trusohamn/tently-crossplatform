@@ -2,21 +2,19 @@ const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
 
-// Construct a schema, using GraphQL schema language
 const schema = buildSchema(`
   type Query {
-    rollDice(numDice: Int!, numSides: Int): [Int]
+    multiply(x: Int!, y: Int!): Int
+    add(x: Int!, y: Int!): Int
   }
 `);
 
-// The root provides a resolver function for each API endpoint
 const root = {
-  hello: () => {
-    return "Hello world!";
+  multiply: ({ x, y }) => {
+    return x * y;
   },
-  rollDice: ({ numDice, numSides }) => {
-    console.log("rolling");
-    return 35;
+  add: ({ x, y }) => {
+    return x + y;
   },
 };
 
