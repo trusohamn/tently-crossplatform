@@ -1,45 +1,71 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
+var cors = require("cors");
 
-const db = {};
+const db = [
+  {
+    id: "1",
+    position: { lat: 59.5, lng: 18.0 },
+    icon: "/032-hut.png",
+  },
+  {
+    id: "2",
+    position: { lat: 59.56, lng: 18.0 },
+    icon: "/033-kayak.png",
+  },
+  {
+    id: "3",
+    position: { lat: 59.59, lng: 18.0 },
+    icon: "/012-camp.png",
+  },
+];
+
 const schema = buildSchema(`
-  input LocationInput {
-    description: String
-  }
-
-  type Location {
-    id: ID!
-    description: String
-  }
-
-  type Query {
-    multiply(x: Int!, y: Int!): Int
-    add(x: Int!, y: Int!): Int
-    getLocation(id: Int!): Location
+type Position {
+    lat: Float
+    lng: Float
 }
 
-  type Mutation {
-    createLocation(id:Int, location: LocationInput!): Location
-  }
+input PositionInput {
+    lat: Float
+    lng: Float
+}
+
+input LocationInput {
+    position: PositionInput
+    icon: String
+}
+
+type Location {
+    id: ID!
+    position: Position
+    icon: String
+}
+
+type Query {
+    getLocation(id: String!): Location
+    getAllLocations: [Location]
+}
+
+type Mutation {
+    createLocation(location: LocationInput!): Location
+}
 `);
 
 const root = {
-  multiply: ({ x, y }) => {
-    return x * y;
-  },
-  add: ({ x, y }) => {
-    return x + y;
-  },
-  getLocation: ({ id }) => db[id],
+  getLocation: ({ id }) => db.find((location) => location.id === id),
+  getAllLocations: () => db,
   createLocation: ({ location }) => {
     const id = require("crypto").randomBytes(10).toString("hex");
-    db[id] = location;
-    return { id, ...location };
+    const entry = { id, ...location };
+    db.push(entry);
+    return entry;
   },
 };
 
 const app = express();
+app.use(cors());
 app.use(
   "/graphql",
   graphqlHTTP({

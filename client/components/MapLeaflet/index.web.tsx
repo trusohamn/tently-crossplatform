@@ -20,7 +20,6 @@ export default ({ markers }: { markers: MarkerObject[] }) => {
         loadedIcons = { ...loadedIcons, [marker.icon]: iconUrl.default };
       }
 
-      console.log(loadedIcons);
       setIcons(loadedIcons);
     };
     loadIcons();
