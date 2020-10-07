@@ -11,7 +11,7 @@ export default ({ markers }: { markers: MarkerObject[] }) => {
   const [icons, setIcons] = useState(null);
 
   useEffect(() => {
-    // first find unique paths
+    // TODO: first find unique paths
     // load icons to map
     const loadIcons = async () => {
       let loadedIcons = {};
@@ -32,9 +32,10 @@ export default ({ markers }: { markers: MarkerObject[] }) => {
         url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
       />
       {!!icons &&
-        markers.map((marker) => {
+        markers.map((marker, id) => {
           return (
             <Marker
+              key={id}
               position={marker.position}
               icon={
                 new Icon({

@@ -4,6 +4,17 @@ import { StyleSheet, Text, View } from "react-native";
 
 import MapLeaflet from "./components/MapLeaflet";
 
+const iconMapping: { [key: string]: String } = {
+  camping: "/012-camp.png",
+  kayak: "/033-kayak.png",
+  hut: "/032-hut.png",
+  default: "/012-camp.png",
+};
+
+const mapIcons = (category: string) => {
+  return iconMapping[category] || iconMapping.default;
+};
+
 export default function App() {
   const [markers, setMarkers] = useState(null);
   useEffect(() => {
@@ -17,7 +28,7 @@ export default function App() {
           },
           body: JSON.stringify({
             query: `{getAllLocations {
-            id, icon, position {
+            id, category, position {
               lat
               lng
             }
@@ -25,10 +36,19 @@ export default function App() {
           }),
         }).then((data) => data.json());
         setMarkers(
-          data.data.getAllLocations.map((location) => ({
-            ...location,
-            size: [32, 32],
-          }))
+          data.data.getAllLocations.map(
+            (location: {
+              id: String;
+              category: string;
+              position: { lat: Number; lng: Number };
+            }) => {
+              return {
+                ...location,
+                size: [32, 32],
+                icon: mapIcons(location.category),
+              };
+            }
+          )
         );
       } catch (e) {
         console.log(e);
