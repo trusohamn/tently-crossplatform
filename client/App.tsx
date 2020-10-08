@@ -16,7 +16,7 @@ const mapIcons = (category: string) => {
 };
 
 export default function App() {
-  const [markers, setMarkers] = useState(null);
+  const [markers, setMarkers] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,36 +35,31 @@ export default function App() {
           }}`,
           }),
         }).then((data) => data.json());
-        setMarkers(
-          data.data.getAllLocations.map(
-            (location: {
-              id: String;
-              category: string;
-              position: { lat: Number; lng: Number };
-            }) => {
-              return {
-                ...location,
-                size: [32, 32],
-                icon: mapIcons(location.category),
-              };
-            }
-          )
+        const mappedData = data.data.getAllLocations.map(
+          (location: {
+            id: String;
+            category: string;
+            position: { lat: Number; lng: Number };
+          }) => ({
+            ...location,
+            size: [32, 32],
+            icon: mapIcons(location.category),
+          })
         );
+        console.log(mappedData);
+        setMarkers(mappedData);
       } catch (e) {
         console.log(e);
       }
     };
     fetchData();
   }, []);
-
   return (
-    !!markers && (
-      <View style={styles.container}>
-        <Text style={styles.header}>Welcome to Tently!</Text>
-        <MapLeaflet markers={markers}></MapLeaflet>
-        <StatusBar style="auto" />
-      </View>
-    )
+    <View style={styles.container}>
+      <Text style={styles.header}>Welcome to Tently!</Text>
+      <MapLeaflet markers={markers}></MapLeaflet>
+      <StatusBar style="auto" />
+    </View>
   );
 }
 
