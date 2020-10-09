@@ -8,7 +8,7 @@ import { MarkerObject } from "./types";
 
 export default ({ markers }: { markers: MarkerObject[] }) => {
   const { mapCenterPosition, zoom } = useMapLeaflet();
-  const [icons, setIcons] = useState(null);
+  const [icons, setIcons] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
     // TODO: first find unique paths
