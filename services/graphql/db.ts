@@ -1,4 +1,5 @@
-module.exports = [
+import { Location } from "./types";
+const locations: Location[] = [
   {
     id: "1",
     position: { lat: 59.5, lng: 18.08 },
@@ -25,3 +26,4 @@ module.exports = [
     category: "camping",
   },
 ];
+export default locations;

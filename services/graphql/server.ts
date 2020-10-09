@@ -1,8 +1,9 @@
-const express = require("express");
-const { graphqlHTTP } = require("express-graphql");
-const { buildSchema } = require("graphql");
-const cors = require("cors");
-const db = require("./db");
+import express from "express";
+import { graphqlHTTP } from "express-graphql";
+import { buildSchema } from "graphql";
+import cors from "cors";
+import db from "./db";
+import { LocationInput } from "./types";
 
 const schema = buildSchema(`
 type Position {
@@ -37,12 +38,13 @@ type Mutation {
 `);
 
 const root = {
-  getLocation: ({ id }) => db.find((location) => location.id === id),
+  getLocation: ({ id }: { id: String }) =>
+    db.find((location) => location.id === id),
   getAllLocations: () => {
     return db;
   },
-  createLocation: ({ location }) => {
-    const id = require("crypto").randomBytes(10).toString("hex");
+  createLocation: ({ location }: { location: LocationInput }) => {
+    const id: String = require("crypto").randomBytes(10).toString("hex");
     const entry = { id, ...location };
     db.push(entry);
     return entry;
