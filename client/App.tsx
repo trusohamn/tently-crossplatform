@@ -20,7 +20,10 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetch("http://localhost:4000/graphql", {
+        // TODO: make a switch basing on env
+        // const data = await fetch("http://localhost:4000/graphql", { // for WEB dev
+        const data = await fetch("http://10.0.2.2:4000/graphql", {
+          // for ANDROID dev
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -46,9 +49,10 @@ export default function App() {
             icon: mapIcons(location.category),
           })
         );
+        console.log(mappedData);
         setMarkers(mappedData);
       } catch (e) {
-        console.log(e);
+        console.log("ERRRRROR", e);
       }
     };
     fetchData();
