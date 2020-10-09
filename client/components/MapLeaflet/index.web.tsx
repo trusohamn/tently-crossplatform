@@ -31,27 +31,24 @@ export default ({ markers }: { markers: MarkerObject[] }) => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
       />
-      {!!icons &&
-        markers.map((marker, id) => {
-          console.log("rendering marker", marker);
-          console.log(icons);
-          return (
-            <Marker
-              key={id}
-              position={marker.position}
-              icon={
-                new Icon({
-                  iconUrl: icons[marker.icon] || "",
-                  iconSize: marker.size,
-                })
-              }
-            >
-              <Popup>
-                Popup <br /> description.
-              </Popup>
-            </Marker>
-          );
-        })}
+      {markers.map((marker, id) => {
+        return (
+          <Marker
+            key={id}
+            position={marker.position}
+            icon={
+              new Icon({
+                iconUrl: icons[marker.icon] || " ",
+                iconSize: marker.size,
+              })
+            }
+          >
+            <Popup>
+              Popup <br /> description.
+            </Popup>
+          </Marker>
+        );
+      })}
     </LeafletMap>
   );
 };

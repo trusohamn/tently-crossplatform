@@ -46,7 +46,6 @@ export default function App() {
             icon: mapIcons(location.category),
           })
         );
-        console.log(mappedData);
         setMarkers(mappedData);
       } catch (e) {
         console.log(e);
