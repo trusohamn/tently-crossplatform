@@ -8,22 +8,6 @@ import { MarkerObject } from "./types";
 
 export default ({ markers }: { markers: MarkerObject[] }) => {
   const { mapCenterPosition, zoom } = useMapLeaflet();
-  const [icons, setIcons] = useState<{ [key: string]: string }>({});
-
-  useEffect(() => {
-    // TODO: first find unique paths
-    // load icons to map
-    const loadIcons = async () => {
-      let loadedIcons = {};
-      for (let marker of markers) {
-        const iconUrl = await import("../../assets/icons" + marker.icon);
-        loadedIcons = { ...loadedIcons, [marker.icon]: iconUrl.default };
-      }
-
-      setIcons(loadedIcons);
-    };
-    loadIcons();
-  }, [markers]);
 
   return (
     <LeafletMap center={mapCenterPosition} zoom={zoom}>
@@ -38,7 +22,7 @@ export default ({ markers }: { markers: MarkerObject[] }) => {
             position={marker.position}
             icon={
               new Icon({
-                iconUrl: icons[marker.icon] || " ",
+                iconUrl: marker.icon || " ",
                 iconSize: marker.size,
               })
             }

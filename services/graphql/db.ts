@@ -22,7 +22,12 @@ const locations: Location[] = [
   },
   {
     id: "5",
-    position: { lat: 59.61, lng: 18.01 },
+    position: { lat: 59.51, lng: 18.01 },
+    category: "camping",
+  },
+  {
+    id: "6",
+    position: { lat: 59.41, lng: 18.06 },
     category: "camping",
   },
 ];

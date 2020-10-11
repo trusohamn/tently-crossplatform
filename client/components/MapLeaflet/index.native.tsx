@@ -23,24 +23,7 @@ export default ({ markers }: { markers: MarkerObject[] }) => {
     webViewLeafletRef,
     setWebViewLeafletRef,
   ] = useState<WebViewLeaflet | null>(null);
-  const [icons, setIcons] = useState<{
-    [key: string]: any;
-  }>({});
 
-  useEffect(() => {
-    // TODO: first find unique paths
-    // load icons to map
-    const loadIcons = async () => {
-      let loadedIcons = {};
-      for (let marker of markers) {
-        const icon = await import("../../assets/icons" + marker.icon);
-        loadedIcons = { ...loadedIcons, [marker.icon]: icon };
-      }
-
-      setIcons(loadedIcons);
-    };
-    loadIcons();
-  }, [markers]);
   return (
     <View style={styles.container}>
       <WebViewLeaflet
@@ -59,7 +42,7 @@ export default ({ markers }: { markers: MarkerObject[] }) => {
         ]}
         mapMarkers={markers.map((marker) => {
           const exampleImageUri = Image.resolveAssetSource(
-            icons[marker.icon] || "  "
+            marker.icon || "  "
           ).uri;
           return {
             ...marker,

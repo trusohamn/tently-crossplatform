@@ -1,15 +1,18 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Platform } from "react-native";
 
 import MapLeaflet from "./components/MapLeaflet";
 
+const iconsPath = "./assets/icons"
 const iconMapping: { [key: string]: String } = {
-  camping: "/012-camp.png",
-  kayak: "/033-kayak.png",
-  hut: "/032-hut.png",
-  default: "/012-camp.png",
+  camping: require(iconsPath+"/012-camp.png"),
+  kayak: require(iconsPath+"/033-kayak.png"),
+  hut: require(iconsPath+"/032-hut.png"),
+  default: require(iconsPath+"/012-camp.png"),
 };
+
+console.log(iconMapping)
 
 const mapIcons = (category: string) => {
   return iconMapping[category] || iconMapping.default;
@@ -20,10 +23,9 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // TODO: make a switch basing on env
-        // const data = await fetch("http://localhost:4000/graphql", { // for WEB dev
-        const data = await fetch("http://10.0.2.2:4000/graphql", {
-          // for ANDROID dev
+         const devService = Platform.OS === 'web' ? "http://localhost:4000/graphql": "http://10.0.2.2:4000/graphql"
+
+         const data = await fetch(devService, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
