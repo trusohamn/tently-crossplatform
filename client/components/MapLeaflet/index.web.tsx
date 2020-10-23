@@ -4,10 +4,10 @@ import "./MapLeaflet.css";
 import { icon, Icon } from "leaflet";
 
 import { useMapLeaflet } from "./hooks";
-import { MarkerObject } from "./types";
+import { MarkerObject, LatLngObject } from "./types";
 
-export default ({ markers }: { markers: MarkerObject[] }) => {
-  const { mapCenterPosition, zoom } = useMapLeaflet();
+export default ({ markers, zoom: zoomSetting, position: positionSetting }: { markers?: MarkerObject[], zoom?:number, position?:LatLngObject }) => {
+  const { mapCenterPosition, zoom } = useMapLeaflet({zoomSetting, positionSetting});
 
   return (
     <LeafletMap center={mapCenterPosition} zoom={zoom}>

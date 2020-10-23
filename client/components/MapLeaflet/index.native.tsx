@@ -17,8 +17,8 @@ const onMessageReceived = (message: WebviewLeafletMessage) => {
   }
 };
 
-export default ({ markers }: { markers: MarkerObject[] }) => {
-  const { mapCenterPosition, zoom } = useMapLeaflet();
+export default ({ markers,  zoom: zoomSetting, position: positionSetting  }: { markers?: MarkerObject[],  zoom?: number, position?: LatLngObject  }) => {
+  const { mapCenterPosition, zoom } = useMapLeaflet({zoomSetting, positionSetting});
   const [
     webViewLeafletRef,
     setWebViewLeafletRef,

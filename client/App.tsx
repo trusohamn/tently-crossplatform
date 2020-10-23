@@ -62,7 +62,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Welcome to Tently!</Text>
-      <MapLeaflet markers={markers}></MapLeaflet>
+      <MapLeaflet markers={markers} zoom={9}></MapLeaflet>
       <StatusBar style="auto" />
     </View>
   );
