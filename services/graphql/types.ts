@@ -1,7 +1,8 @@
 export type LocationInput = {
-  position: { lat: Number; lng: Number };
-  category: String;
+  position: { lat: number; lng: number };
+  category: string;
+  name: string
 };
 export type Location = LocationInput & {
-  id: String;
+  id: string;
 };

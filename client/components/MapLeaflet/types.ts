@@ -5,4 +5,5 @@ export type MarkerObject = {
   position: LatLngObject;
   icon: string;
   size: [number, number];
+  name: string
 };

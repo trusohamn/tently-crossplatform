@@ -6,7 +6,7 @@ import { icon, Icon } from "leaflet";
 import { useMapLeaflet } from "./hooks";
 import { MarkerObject, LatLngObject } from "./types";
 
-export default ({ markers, zoom: zoomSetting, position: positionSetting }: { markers?: MarkerObject[], zoom?:number, position?:LatLngObject }) => {
+export default ({ markers=[], zoom: zoomSetting, position: positionSetting }: { markers?: MarkerObject[], zoom?:number, position?:LatLngObject }) => {
   const { mapCenterPosition, zoom } = useMapLeaflet({zoomSetting, positionSetting});
 
   return (
@@ -15,7 +15,7 @@ export default ({ markers, zoom: zoomSetting, position: positionSetting }: { mar
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
       />
-      {markers.map((marker, id) => {
+      { markers.map((marker, id) => {
         return (
           <Marker
             key={id}
@@ -28,7 +28,7 @@ export default ({ markers, zoom: zoomSetting, position: positionSetting }: { mar
             }
           >
             <Popup>
-              Popup <br /> description.
+            {marker.name} <br /> 
             </Popup>
           </Marker>
         );

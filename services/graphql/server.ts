@@ -19,12 +19,14 @@ input PositionInput {
 input LocationInput {
     position: PositionInput
     category: String
+    name: String
 }
 
 type Location {
     id: ID!
     position: Position
     category: String
+    name: String
 }
 
 type Query {
@@ -38,13 +40,13 @@ type Mutation {
 `);
 
 const root = {
-  getLocation: ({ id }: { id: String }) =>
+  getLocation: ({ id }: { id: string }) =>
     db.find((location) => location.id === id),
   getAllLocations: () => {
     return db;
   },
   createLocation: ({ location }: { location: LocationInput }) => {
-    const id: String = require("crypto").randomBytes(10).toString("hex");
+    const id: string = require("crypto").randomBytes(10).toString("hex");
     const entry = { id, ...location };
     db.push(entry);
     return entry;

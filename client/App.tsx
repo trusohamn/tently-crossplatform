@@ -12,8 +12,6 @@ const iconMapping: { [key: string]: String } = {
   default: require(iconsPath+"/012-camp.png"),
 };
 
-console.log(iconMapping)
-
 const mapIcons = (category: string) => {
   return iconMapping[category] || iconMapping.default;
 };
@@ -33,7 +31,7 @@ export default function App() {
           },
           body: JSON.stringify({
             query: `{getAllLocations {
-            id, category, position {
+            id, category, name, position {
               lat
               lng
             }
@@ -42,16 +40,15 @@ export default function App() {
         }).then((data) => data.json());
         const mappedData = data.data.getAllLocations.map(
           (location: {
-            id: String;
+            id: string;
             category: string;
-            position: { lat: Number; lng: Number };
+            position: { lat: number; lng: number };
           }) => ({
             ...location,
             size: [32, 32],
             icon: mapIcons(location.category),
           })
         );
-        console.log(mappedData);
         setMarkers(mappedData);
       } catch (e) {
         console.log("ERRRRROR", e);
@@ -79,5 +76,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     color: "#062542",
+    padding: 20
   },
 });
