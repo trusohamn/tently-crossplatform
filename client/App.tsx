@@ -12,20 +12,45 @@ const iconMapping: { [key: string]: String } = {
   default: require(iconsPath + '/012-camp.png'),
 }
 
+const devService =
+  Platform.OS === 'web'
+    ? 'http://localhost:4000/graphql'
+    : 'http://10.0.2.2:4000/graphql'
+
 const mapIcons = (category: string) => {
   return iconMapping[category] || iconMapping.default
 }
 
+const saveData = async () => {
+  const mutation = `mutation {
+    createLocation(location: {
+      category: "camping"
+      name: "the new one"
+      position: {
+        lat: 59.55
+        lng: 18.03
+      }
+    }) {
+      id
+    }
+  }`
+
+  const data = await fetch(devService, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({ query: mutation }),
+  }).then((data) => data.json())
+}
+
 export default function App() {
   const [markers, setMarkers] = useState([])
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const devService =
-          Platform.OS === 'web'
-            ? 'http://localhost:4000/graphql'
-            : 'http://10.0.2.2:4000/graphql'
-
         const data = await fetch(devService, {
           method: 'POST',
           headers: {
@@ -58,6 +83,7 @@ export default function App() {
       }
     }
     fetchData()
+    // saveData()
   }, [])
   return (
     <View style={styles.container}>
