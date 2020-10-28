@@ -1,8 +1,15 @@
-import { StatusBar } from 'expo-status-bar'
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, Platform } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+  Picker,
+  TextInput,
+} from 'react-native'
 
 import MapLeaflet from './components/MapLeaflet'
+import markerIcon from './assets/icons/marker.png'
 
 const iconsPath = './assets/icons'
 const iconMapping: { [key: string]: String } = {
@@ -47,6 +54,11 @@ const saveData = async () => {
 
 export default function App() {
   const [markers, setMarkers] = useState([])
+  const [category, setCategory] = useState('camping')
+  const [selectedPosition, setSelectedPosition] = useState({
+    lat: 59.5,
+    lng: 18.0,
+  })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -88,8 +100,34 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Welcome to Tently!</Text>
-      <MapLeaflet markers={markers} zoom={9}></MapLeaflet>
-      <StatusBar style="auto" />
+      <View style={styles.map}>
+        <MapLeaflet
+          markers={markers}
+          zoom={9}
+          selectedPosition={selectedPosition}
+          setSelectedPosition={setSelectedPosition}
+          markerIcon={markerIcon}
+        ></MapLeaflet>
+      </View>
+      <View>
+        <Text> Add Location </Text>
+        <View>
+          <TextInput placeholder="Name" />
+          <Text>
+            Lat: {selectedPosition.lat} Lng:{selectedPosition.lng}
+          </Text>
+          <Picker
+            selectedValue={category}
+            onValueChange={(currentcategory) =>
+              setCategory(currentcategory)
+            }
+          >
+            <Picker.Item label="camping" value="camping" />
+            <Picker.Item label="kayak" value="kayak" />
+            <Picker.Item label="hut" value="hut" />
+          </Picker>
+        </View>
+      </View>
     </View>
   )
 }
@@ -105,6 +143,10 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: '#062542',
-    padding: 20,
+    padding: 70,
+  },
+  map: {
+    height: 500,
+    width: 500,
   },
 })

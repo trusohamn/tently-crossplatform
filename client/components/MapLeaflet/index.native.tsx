@@ -8,7 +8,7 @@ import { View, StyleSheet, Alert, Image } from 'react-native'
 import { useMapLeaflet } from './hooks'
 import { LatLngObject, MarkerObject } from './types'
 
-export default ({
+const MapLeaflet = ({
   markers = [],
   zoom: zoomSetting,
   position: positionSetting,
@@ -85,3 +85,5 @@ const styles = StyleSheet.create({
     minWidth: 400,
   },
 })
+
+export default MapLeaflet
