@@ -6,6 +6,7 @@ import {
   Platform,
   Picker,
   TextInput,
+  Button,
 } from 'react-native'
 
 import MapLeaflet from './components/MapLeaflet'
@@ -28,75 +29,74 @@ const mapIcons = (category: string) => {
   return iconMapping[category] || iconMapping.default
 }
 
-const saveData = async () => {
-  const mutation = `mutation {
-    createLocation(location: {
-      category: "camping"
-      name: "the new one"
-      position: {
-        lat: 59.55
-        lng: 18.03
-      }
-    }) {
-      id
-    }
-  }`
-
-  const data = await fetch(devService, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify({ query: mutation }),
-  }).then((data) => data.json())
-}
-
 export default function App() {
   const [markers, setMarkers] = useState([])
   const [category, setCategory] = useState('camping')
+  const [name, setName] = useState('')
   const [selectedPosition, setSelectedPosition] = useState({
     lat: 59.5,
     lng: 18.0,
   })
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetch(devService, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({
-            query: `{getAllLocations {
-            id, category, name, position {
-              lat
-              lng
-            }
-          }}`,
-          }),
-        }).then((data) => data.json())
-        const mappedData = data.data.getAllLocations.map(
-          (location: {
-            id: string
-            category: string
-            position: { lat: number; lng: number }
-          }) => ({
-            ...location,
-            size: [32, 32],
-            icon: mapIcons(location.category),
-          }),
-        )
-        setMarkers(mappedData)
-      } catch (e) {
-        console.log('ERRRRROR', e)
+  const fetchData = async () => {
+    const data = await fetch(devService, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        query: `{getAllLocations {
+          id, category, name, position {
+            lat
+            lng
+          }
+        }}`,
+      }),
+    }).then((data) => data.json())
+    const mappedData = data.data.getAllLocations.map(
+      (location: {
+        id: string
+        category: string
+        position: { lat: number; lng: number }
+      }) => ({
+        ...location,
+        size: [32, 32],
+        icon: mapIcons(location.category),
+      }),
+    )
+    setMarkers(mappedData)
+  }
+
+  const saveData = async () => {
+    const mutation = `mutation {
+      createLocation(location: {
+        category: "${category}"
+        name: "${name}"
+        position: {
+          lat: ${selectedPosition.lat}
+          lng: ${selectedPosition.lng}
+        }
+      }) {
+        id
       }
-    }
+    }`
+    const data = await fetch(devService, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({ query: mutation }),
+    }).then((data) => data.json())
+
     fetchData()
-    // saveData()
+  }
+
+  useEffect(() => {
+    fetchData()
   }, [])
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Welcome to Tently!</Text>
@@ -112,7 +112,11 @@ export default function App() {
       <View>
         <Text> Add Location </Text>
         <View>
-          <TextInput placeholder="Name" />
+          <TextInput
+            placeholder="Name"
+            defaultValue={name}
+            onChangeText={(newName) => setName(newName)}
+          />
           <Text>
             Lat: {selectedPosition.lat} Lng:{selectedPosition.lng}
           </Text>
@@ -127,6 +131,7 @@ export default function App() {
             <Picker.Item label="hut" value="hut" />
           </Picker>
         </View>
+        <Button title="Submit" onPress={saveData} />
       </View>
     </View>
   )

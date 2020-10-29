@@ -31,7 +31,7 @@ const MapLeaflet = ({
     positionSetting,
   })
 
-  const refmarker = React.createRef()
+  const refmarker = React.createRef<Marker>()
 
   const updatePosition = () => {
     console.log('updating')
@@ -43,23 +43,29 @@ const MapLeaflet = ({
   }
 
   return (
-    <LeafletMap center={mapCenterPosition} zoom={zoom}>
+    <LeafletMap
+      center={mapCenterPosition}
+      zoom={zoom}
+      onclick={(e) => console.log(e)}
+    >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
       />
-      <Marker
-        position={selectedPosition}
-        draggable={true}
-        ondragend={updatePosition}
-        ref={refmarker}
-        icon={
-          new Icon({
-            iconUrl: markerIcon || ' ',
-            iconSize: [32, 42],
-          })
-        }
-      ></Marker>
+      {!!selectedPosition && (
+        <Marker
+          position={selectedPosition}
+          draggable={true}
+          ondragend={updatePosition}
+          ref={refmarker}
+          icon={
+            new Icon({
+              iconUrl: markerIcon || ' ',
+              iconSize: [32, 42],
+            })
+          }
+        ></Marker>
+      )}
       {markers.map((marker, id) => {
         return (
           <Marker
