@@ -7,3 +7,12 @@ export type MarkerObject = {
   size: [number, number]
   name: string
 }
+
+export type MapLeafletProps = {
+  markers?: MarkerObject[]
+  zoom?: number
+  position?: LatLngObject
+  selectedPosition?: LatLngObject
+  setSelectedPosition?: any
+  markerIcon?: string
+}

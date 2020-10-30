@@ -9,7 +9,7 @@ import './MapLeaflet.css'
 import { Icon } from 'leaflet'
 
 import { useMapLeaflet } from './hooks'
-import { MarkerObject, LatLngObject } from './types'
+import { MapLeafletProps } from './types'
 
 const MapLeaflet = ({
   markers = [],
@@ -18,14 +18,7 @@ const MapLeaflet = ({
   selectedPosition,
   setSelectedPosition,
   markerIcon,
-}: {
-  markers?: MarkerObject[]
-  zoom?: number
-  position?: LatLngObject
-  selectedPosition?: LatLngObject
-  setSelectedPosition?: any
-  markerIcon?: string
-}) => {
+}: MapLeafletProps) => {
   const { mapCenterPosition, zoom } = useMapLeaflet({
     zoomSetting,
     positionSetting,
@@ -34,9 +27,7 @@ const MapLeaflet = ({
   const refmarker = React.createRef<Marker>()
 
   const updatePosition = () => {
-    console.log('updating')
     const marker = refmarker.current
-    console.log(marker)
     if (marker != null) {
       setSelectedPosition(marker.leafletElement.getLatLng())
     }

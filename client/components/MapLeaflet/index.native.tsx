@@ -6,17 +6,16 @@ import {
 } from 'react-native-webview-leaflet'
 import { View, StyleSheet, Alert, Image } from 'react-native'
 import { useMapLeaflet } from './hooks'
-import { LatLngObject, MarkerObject } from './types'
+import { LatLngObject, MapLeafletProps } from './types'
 
 const MapLeaflet = ({
   markers = [],
   zoom: zoomSetting,
   position: positionSetting,
-}: {
-  markers?: MarkerObject[]
-  zoom?: number
-  position?: LatLngObject
-}) => {
+  selectedPosition,
+  setSelectedPosition,
+  markerIcon,
+}: MapLeafletProps) => {
   const { mapCenterPosition, zoom } = useMapLeaflet({
     zoomSetting,
     positionSetting,
@@ -30,10 +29,7 @@ const MapLeaflet = ({
     switch (message.event) {
       case WebViewLeafletEvents.ON_MAP_TOUCHED:
         const position = message?.payload?.touchLatLng as LatLngObject
-        Alert.alert(
-          `Map Touched at:`,
-          `${position.lat}, ${position.lng}`,
-        )
+        setSelectedPosition(position)
         break
       case WebViewLeafletEvents.ON_MAP_MARKER_CLICKED:
         Alert.alert(
@@ -45,6 +41,24 @@ const MapLeaflet = ({
 
         break
     }
+  }
+
+  const setMarkersOnMap = () => {
+    const locationMarkers = markers.map((marker) => {
+      return {
+        ...marker,
+        icon: Image.resolveAssetSource(marker.icon || '  ').uri,
+      }
+    })
+    !!selectedPosition &&
+      locationMarkers.push({
+        id: 'selectedMarker',
+        icon: Image.resolveAssetSource(markerIcon || '  ').uri,
+        position: selectedPosition,
+        size: [32, 42],
+        name: 'selectedMarker',
+      })
+    return locationMarkers
   }
 
   return (
@@ -63,15 +77,7 @@ const MapLeaflet = ({
             url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           },
         ]}
-        mapMarkers={markers.map((marker) => {
-          const exampleImageUri = Image.resolveAssetSource(
-            marker.icon || '  ',
-          ).uri
-          return {
-            ...marker,
-            icon: exampleImageUri,
-          }
-        })}
+        mapMarkers={setMarkersOnMap()}
         mapCenterPosition={mapCenterPosition}
         zoom={zoom}
       ></WebViewLeaflet>
@@ -82,7 +88,8 @@ const MapLeaflet = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    minWidth: 400,
+    minWidth: 300,
+    minHeight: 300,
   },
 })
 
