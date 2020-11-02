@@ -40,7 +40,7 @@ const MapLeaflet = ({
       <LeafletMap
         center={mapCenterPosition}
         zoom={zoom}
-        onclick={(e) => console.log(e)}
+        onclick={(e) => setSelectedPosition(e.latlng)}
       >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
