@@ -90,6 +90,8 @@ const styles = StyleSheet.create({
     flex: 1,
     minWidth: 300,
     minHeight: 300,
+    maxHeight: 600,
+    maxWidth: 400,
   },
 })
 

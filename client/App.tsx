@@ -3,31 +3,17 @@ import {
   StyleSheet,
   Text,
   View,
-  Platform,
   Picker,
   TextInput,
   Button,
+  /* useWindowDimensions, */
 } from 'react-native'
 
+const { mapIcons, markerIcon } = require('./helpers/icons')
+
 import MapLeaflet from './components/MapLeaflet'
-import markerIcon from './assets/icons/marker.png'
 
-const iconsPath = './assets/icons'
-const iconMapping: { [key: string]: String } = {
-  camping: require(iconsPath + '/012-camp.png'),
-  kayak: require(iconsPath + '/033-kayak.png'),
-  hut: require(iconsPath + '/032-hut.png'),
-  default: require(iconsPath + '/012-camp.png'),
-}
-
-const devService =
-  Platform.OS === 'web'
-    ? 'http://localhost:4000/graphql'
-    : 'http://10.0.2.2:4000/graphql'
-
-const mapIcons = (category: string) => {
-  return iconMapping[category] || iconMapping.default
-}
+import { service } from './constants'
 
 export default function App() {
   const [markers, setMarkers] = useState([])
@@ -39,7 +25,7 @@ export default function App() {
   })
 
   const fetchData = async () => {
-    const data = await fetch(devService, {
+    const data = await fetch(service, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -81,7 +67,7 @@ export default function App() {
         id
       }
     }`
-    const data = await fetch(devService, {
+    const data = await fetch(service, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -96,6 +82,28 @@ export default function App() {
   useEffect(() => {
     fetchData()
   }, [])
+  /* console.log(useWindowDimensions) */
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#52aca2',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    header: {
+      fontSize: 30,
+      fontWeight: 'bold',
+      color: '#062542',
+      padding: 20,
+      flex: 1,
+    },
+    map: {
+      flex: 6,
+      width: 200,
+    },
+    form: { flex: 2 },
+  })
 
   return (
     <View style={styles.container}>
@@ -109,7 +117,7 @@ export default function App() {
           markerIcon={markerIcon}
         ></MapLeaflet>
       </View>
-      <View>
+      <View style={styles.form}>
         <Text> Add Location </Text>
         <View>
           <TextInput
@@ -136,22 +144,3 @@ export default function App() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#52aca2',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  header: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#062542',
-    padding: 70,
-  },
-  map: {
-    height: 300,
-    width: 300,
-  },
-})

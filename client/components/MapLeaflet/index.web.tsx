@@ -34,48 +34,50 @@ const MapLeaflet = ({
   }
 
   return (
-    <LeafletMap
-      center={mapCenterPosition}
-      zoom={zoom}
-      onclick={(e) => console.log(e)}
-    >
-      <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
-      />
-      {!!selectedPosition && (
-        <Marker
-          position={selectedPosition}
-          draggable={true}
-          ondragend={updatePosition}
-          ref={refmarker}
-          icon={
-            new Icon({
-              iconUrl: markerIcon || ' ',
-              iconSize: [32, 42],
-            })
-          }
-        ></Marker>
-      )}
-      {markers.map((marker, id) => {
-        return (
+    <div className="main-container">
+      <LeafletMap
+        center={mapCenterPosition}
+        zoom={zoom}
+        onclick={(e) => console.log(e)}
+      >
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+        />
+        {!!selectedPosition && (
           <Marker
-            key={id}
-            position={marker.position}
+            position={selectedPosition}
+            draggable={true}
+            ondragend={updatePosition}
+            ref={refmarker}
             icon={
               new Icon({
-                iconUrl: marker.icon || ' ',
-                iconSize: marker.size,
+                iconUrl: markerIcon || ' ',
+                iconSize: [32, 42],
               })
             }
-          >
-            <Popup>
-              {marker.name} <br />
-            </Popup>
-          </Marker>
-        )
-      })}
-    </LeafletMap>
+          ></Marker>
+        )}
+        {markers.map((marker, id) => {
+          return (
+            <Marker
+              key={id}
+              position={marker.position}
+              icon={
+                new Icon({
+                  iconUrl: marker.icon || ' ',
+                  iconSize: marker.size,
+                })
+              }
+            >
+              <Popup>
+                {marker.name} <br />
+              </Popup>
+            </Marker>
+          )
+        })}
+      </LeafletMap>
+    </div>
   )
 }
 
