@@ -6,6 +6,7 @@ import {
   Picker,
   TextInput,
   Button,
+  TouchableOpacity,
 } from 'react-native'
 
 import { markerIcon } from './helpers/icons'
@@ -54,17 +55,21 @@ export default function App() {
         ></MapLeaflet>
       </View>
       <View style={styles.form}>
-        <Text> Add Location </Text>
+        <Text style={styles.formTilte}> Add Location </Text>
         <View>
           <TextInput
-            placeholder="Name"
+            style={styles.formElements}
+            placeholder="Add location's name"
             defaultValue={name}
             onChangeText={(newName) => setName(newName)}
+            placeholderTextColor={'blue'}
           />
-          <Text>
-            Lat: {selectedPosition.lat} Lng:{selectedPosition.lng}
+          <Text style={styles.formElements}>
+            Position Lat: {selectedPosition.lat.toFixed(2)} Lng:
+            {selectedPosition.lng.toFixed(2)}
           </Text>
           <Picker
+            style={styles.formElements}
             selectedValue={category}
             onValueChange={(currentcategory) =>
               setCategory(currentcategory)
@@ -75,7 +80,9 @@ export default function App() {
             <Picker.Item label="hut" value="hut" />
           </Picker>
         </View>
-        <Button title="Submit" onPress={saveData} />
+        <TouchableOpacity style={styles.formButton}>
+          <Button title="Submit" onPress={saveData} />
+        </TouchableOpacity>
       </View>
     </View>
   )
@@ -90,7 +97,6 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 5,
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -100,9 +106,26 @@ const styles = StyleSheet.create({
     color: '#062542',
   },
   map: {
-    flex: 6,
+    flex: 1,
     width: '100%',
     height: '100%',
   },
-  form: { flex: 3 },
+  form: {
+    padding: 10,
+    margin: 5,
+    backgroundColor: '#c5ddba',
+  },
+  formElements: {
+    paddingVertical: 5,
+  },
+  formButton: {
+    height: 40,
+    width: 160,
+    borderRadius: 10,
+    backgroundColor: '#aad3df',
+    marginLeft: 50,
+    marginRight: 50,
+    marginTop: 20,
+  },
+  formTilte: { fontSize: 20, fontWeight: 'bold', color: '#062542' },
 })
