@@ -7,9 +7,11 @@ import {
 } from 'react-leaflet'
 import './MapLeaflet.css'
 import { Icon } from 'leaflet'
+import { View } from 'react-native'
 
 import { useMapLeaflet } from './hooks'
 import { MapLeafletProps } from './types'
+import styles from './style'
 
 const MapLeaflet = ({
   markers = [],
@@ -34,7 +36,7 @@ const MapLeaflet = ({
   }
 
   return (
-    <div className="main-container">
+    <View style={styles.container}>
       <LeafletMap
         center={mapCenterPosition}
         zoom={zoom}
@@ -77,7 +79,7 @@ const MapLeaflet = ({
           )
         })}
       </LeafletMap>
-    </div>
+    </View>
   )
 }
 

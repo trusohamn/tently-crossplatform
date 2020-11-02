@@ -6,18 +6,15 @@ import {
   Picker,
   TextInput,
   Button,
-  /* useWindowDimensions, */
 } from 'react-native'
 
-import { mapIcons, markerIcon } from './helpers/icons'
+import { markerIcon } from './helpers/icons'
 import {
   fetchAllLocalisations,
   saveNewLocalisation,
 } from './helpers/data'
 
 import MapLeaflet from './components/MapLeaflet'
-
-import { service } from './constants'
 
 export default function App() {
   const [markers, setMarkers] = useState([])
@@ -41,32 +38,12 @@ export default function App() {
   useEffect(() => {
     fetchData()
   }, [])
-  /* console.log(useWindowDimensions) */
-
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#52aca2',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    header: {
-      fontSize: 30,
-      fontWeight: 'bold',
-      color: '#062542',
-      padding: 20,
-      flex: 1,
-    },
-    map: {
-      flex: 6,
-      width: 200,
-    },
-    form: { flex: 2 },
-  })
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Welcome to Tently!</Text>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Welcome to Tently!</Text>
+      </View>
       <View style={styles.map}>
         <MapLeaflet
           markers={markers}
@@ -103,3 +80,29 @@ export default function App() {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#52aca2',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  header: {
+    padding: 5,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#062542',
+  },
+  map: {
+    flex: 6,
+    width: '100%',
+    height: '100%',
+  },
+  form: { flex: 3 },
+})

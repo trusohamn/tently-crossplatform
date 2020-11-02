@@ -4,9 +4,10 @@ import {
   WebViewLeafletEvents,
   WebviewLeafletMessage,
 } from 'react-native-webview-leaflet'
-import { View, StyleSheet, Alert, Image } from 'react-native'
+import { View, Alert, Image } from 'react-native'
 import { useMapLeaflet } from './hooks'
 import { LatLngObject, MapLeafletProps } from './types'
+import styles from './style'
 
 const MapLeaflet = ({
   markers = [],
@@ -84,15 +85,5 @@ const MapLeaflet = ({
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    minWidth: 300,
-    minHeight: 300,
-    maxHeight: 600,
-    maxWidth: 400,
-  },
-})
 
 export default MapLeaflet
