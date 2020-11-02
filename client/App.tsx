@@ -9,7 +9,11 @@ import {
   /* useWindowDimensions, */
 } from 'react-native'
 
-const { mapIcons, markerIcon } = require('./helpers/icons')
+import { mapIcons, markerIcon } from './helpers/icons'
+import {
+  fetchAllLocalisations,
+  saveNewLocalisation,
+} from './helpers/data'
 
 import MapLeaflet from './components/MapLeaflet'
 
@@ -25,57 +29,12 @@ export default function App() {
   })
 
   const fetchData = async () => {
-    const data = await fetch(service, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        query: `{getAllLocations {
-          id, category, name, position {
-            lat
-            lng
-          }
-        }}`,
-      }),
-    }).then((data) => data.json())
-    const mappedData = data.data.getAllLocations.map(
-      (location: {
-        id: string
-        category: string
-        position: { lat: number; lng: number }
-      }) => ({
-        ...location,
-        size: [32, 32],
-        icon: mapIcons(location.category),
-      }),
-    )
+    const mappedData = await fetchAllLocalisations()
     setMarkers(mappedData)
   }
 
   const saveData = async () => {
-    const mutation = `mutation {
-      createLocation(location: {
-        category: "${category}"
-        name: "${name}"
-        position: {
-          lat: ${selectedPosition.lat}
-          lng: ${selectedPosition.lng}
-        }
-      }) {
-        id
-      }
-    }`
-    const data = await fetch(service, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({ query: mutation }),
-    }).then((data) => data.json())
-
+    await saveNewLocalisation({ category, name, selectedPosition })
     fetchData()
   }
 
