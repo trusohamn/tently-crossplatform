@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { LatLngObject } from './types'
 
 export const useMapLeaflet = ({

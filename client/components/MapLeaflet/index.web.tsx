@@ -26,7 +26,7 @@ const MapLeaflet = ({
     positionSetting,
   })
 
-  const refmarker = React.createRef<Marker>()
+  const refmarker = createRef<Marker>()
 
   const updatePosition = () => {
     const marker = refmarker.current
