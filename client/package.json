@@ -5,7 +5,8 @@
     "ios": "react-native run-ios",
     "web": "expo start --web",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "test-pack": "rm -rf node_modules && yarn add /home/marta/Expo/TentlyCrossPlatform/client/components/MapLeaflet"
   },
   "dependencies": {
     "@types/react-leaflet": "^2.5.2",
@@ -14,7 +15,7 @@
     "expo-status-bar": "^1.0.0",
     "expo-updates": "~0.2.8",
     "leaflet": "^1.7.1",
-    "mapleaflet-reactwebnative": "file:components/MapLeaflet",
+    "mapleaflet-reactwebnative": "/home/marta/Expo/TentlyCrossPlatform/client/components/MapLeaflet",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-leaflet": "^2.7.0",

@@ -15,7 +15,7 @@ import {
   saveNewLocalisation,
 } from './helpers/data'
 
-import MapLeaflet from './components/MapLeaflet'
+import MapLeaflet from 'mapleaflet-reactwebnative'
 
 export default function App() {
   const [markers, setMarkers] = useState([])
