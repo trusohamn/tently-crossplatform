@@ -1,0 +1,20 @@
+{
+  "name": "mapleaflet-react-web-native",
+  "version": "1.0.1",
+  "description": "Map leaflet component working both for react web and native",
+  "main": "lib/index.js",
+  "react-native": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "build": "tsc --project ./tsconfig.json",
+    "pub": "npm version patch && publish --registry http://localhost:4873/",
+    "lint": "tslint --fix -p ./tsconfig.json",
+    "prepare": "rm -rf /home/marta/Expo/TentlyCrossPlatform/client/packages/MapLeaflet/lib && yarn build"
+  },
+  "author": "Marta Trusohamn",
+  "repository": "https://github.com/trusohamn/tently-crossplatform",
+  "license": "MIT"
+}
