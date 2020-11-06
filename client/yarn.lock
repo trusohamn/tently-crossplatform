@@ -5748,7 +5748,7 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-"mapleaflet-reactwebnative@file:components/MapLeaflet":
+mapleaflet-reactwebnative@/home/marta/Expo/TentlyCrossPlatform/client/components/MapLeaflet:
   version "1.0.1"
   dependencies:
     "@types/react-leaflet" "^2.5.2"

@@ -6,7 +6,7 @@
     "web": "expo start --web",
     "start": "react-native start",
     "test": "jest",
-    "test-pack": "rm -rf node_modules && yarn add /home/marta/Expo/TentlyCrossPlatform/client/components/MapLeaflet"
+    "test-pack": "rm -rf /home/marta/Expo/TentlyCrossPlatform/client/node_modules/mapleaflet-reactwebnative && yarn add /home/marta/Expo/TentlyCrossPlatform/client/components/MapLeaflet"
   },
   "dependencies": {
     "@types/react-leaflet": "^2.5.2",
