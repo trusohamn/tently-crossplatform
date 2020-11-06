@@ -3,7 +3,7 @@ import {
   WebViewLeaflet,
   WebViewLeafletEvents,
   WebviewLeafletMessage,
-} from 'react-native-webview-leaflet'
+} from '@trusohamn/react-native-webview-leaflet'
 import { View, Alert, Image } from 'react-native'
 import { useMapLeaflet } from './hooks'
 import { LatLngObject, MapLeafletProps } from './types'

@@ -14,5 +14,5 @@ export type MapLeafletProps = {
   position?: LatLngObject
   selectedPosition?: LatLngObject
   setSelectedPosition?: any
-  markerIcon?: string
+  markerIcon?: any
 }

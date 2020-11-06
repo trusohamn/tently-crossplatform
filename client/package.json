@@ -9,13 +9,14 @@
     "test-pack": "rm -rf /home/marta/Expo/TentlyCrossPlatform/client/node_modules/mapleaflet-reactwebnative && yarn add /home/marta/Expo/TentlyCrossPlatform/client/components/MapLeaflet"
   },
   "dependencies": {
+    "@trusohamn/react-native-webview-leaflet": "/home/marta/Github/react-native-webview-leaflet/WebViewLeaflet",
     "@types/react-leaflet": "^2.5.2",
     "expo": "~38.0.9",
     "expo-splash-screen": "^0.5.0",
     "expo-status-bar": "^1.0.0",
     "expo-updates": "~0.2.8",
     "leaflet": "^1.7.1",
-    "mapleaflet-reactwebnative": "/home/marta/Expo/TentlyCrossPlatform/client/components/MapLeaflet",
+    "mapleaflet-react-web-native": "/home/marta/Expo/TentlyCrossPlatform/client/components/MapLeaflet",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-leaflet": "^2.7.0",

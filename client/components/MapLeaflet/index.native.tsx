@@ -3,7 +3,7 @@ import {
   WebViewLeaflet,
   WebViewLeafletEvents,
   WebviewLeafletMessage,
-} from 'react-native-webview-leaflet'
+} from '@trusohamn/react-native-webview-leaflet'
 import { View, Alert, Image } from 'react-native'
 import { useMapLeaflet } from './hooks'
 import { LatLngObject, MapLeafletProps } from './types'
@@ -35,8 +35,11 @@ const MapLeaflet = ({
       case WebViewLeafletEvents.ON_MAP_MARKER_CLICKED:
         Alert.alert(
           ` ${
-            markers[message?.payload?.mapMarkerID - 1].name ||
-            'unknown'
+            message?.payload?.mapMarkerID
+              ? markers[
+                  parseInt(message?.payload?.mapMarkerID, 10) - 1
+                ].name
+              : 'unknown'
           }`,
         )
 
@@ -45,20 +48,21 @@ const MapLeaflet = ({
   }
 
   const setMarkersOnMap = () => {
-    const locationMarkers = markers.map((marker) => {
+    const locationMarkers = markers.map((marker: any) => {
       return {
         ...marker,
-        icon: Image.resolveAssetSource(marker.icon || '  ').uri,
+        icon: Image.resolveAssetSource(marker.icon || 0).uri,
       }
     })
-    !!selectedPosition &&
+    if (!!selectedPosition) {
       locationMarkers.push({
         id: 'selectedMarker',
-        icon: Image.resolveAssetSource(markerIcon || '  ').uri,
+        icon: Image.resolveAssetSource(markerIcon || 0).uri,
         position: selectedPosition,
         size: [32, 42],
         name: 'selectedMarker',
       })
+    }
     return locationMarkers
   }
 
