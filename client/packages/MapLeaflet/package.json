@@ -1,12 +1,12 @@
 {
   "name": "mapleaflet-react-web-native",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Map leaflet component working both for react web and native",
   "main": "lib/index.js",
   "react-native": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib/**/*"
+    "lib"
   ],
   "scripts": {
     "build": "tsc --project ./tsconfig.json",
