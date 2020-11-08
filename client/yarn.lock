@@ -7858,8 +7858,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-"mapleaflet-react-web-native@file:packages/MapLeaflet":
-  version "1.0.2"
+mapleaflet-react-web-native@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/mapleaflet-react-web-native/-/mapleaflet-react-web-native-1.0.8.tgz#bf3ca052f52aa4288aa28db24d35618b8598eea2"
+  integrity sha512-r8b2Pdi4gOZsjbIaiSCEpY170mKtQBx4a/nFEDdIc75YRQIho89YDk4051SwGXiwLDhh/ZTa+z23r0x/8XjEpw==
 
 md5-file@^3.2.3:
   version "3.2.3"
