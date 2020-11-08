@@ -5,8 +5,13 @@
     "name": "tently",
     "slug": "tently",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"]
+  },
+  "web": {
+    "build": {
+      "babel": {
+        "include": ["mapleaflet-react-web-native"]
+      }
+    }
   }
 }
