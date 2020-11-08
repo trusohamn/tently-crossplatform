@@ -1,10 +1,10 @@
 import React, { createRef } from 'react';
 import { Map as LeafletMap, TileLayer, Marker, Popup, } from 'react-leaflet';
-import './MapLeaflet.css';
+import '../MapLeaflet.css';
 import { Icon } from 'leaflet';
 import { View } from 'react-native';
-import { useMapLeaflet } from './hooks';
-import styles from './style';
+import { useMapLeaflet } from '../hooks';
+import styles from '../style';
 const MapLeaflet = ({ markers = [], zoom: zoomSetting, position: positionSetting, selectedPosition, setSelectedPosition, markerIcon, }) => {
     const { mapCenterPosition, zoom } = useMapLeaflet({
         zoomSetting,

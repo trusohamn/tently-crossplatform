@@ -5866,10 +5866,10 @@ map-visit@^1.0.0:
     object-visit "^1.0.0"
 
 mapleaflet-react-web-native@/home/marta/Expo/TentlyCrossPlatform/client/packages/MapLeaflet:
-  version "1.0.1"
+  version "1.0.2"
 
 "mapleaflet-react-web-native@file:packages/MapLeaflet":
-  version "1.0.1"
+  version "1.0.2"
 
 md5-file@^3.2.3:
   version "3.2.3"

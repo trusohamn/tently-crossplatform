@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { WebViewLeaflet, WebViewLeafletEvents, } from '@trusohamn/react-native-webview-leaflet';
 import { View, Alert, Image } from 'react-native';
-import { useMapLeaflet } from './hooks';
-import styles from './style';
+import { useMapLeaflet } from '../hooks';
+import styles from '../style';
 const MapLeaflet = ({ markers = [], zoom: zoomSetting, position: positionSetting, selectedPosition, setSelectedPosition, markerIcon, }) => {
     const { mapCenterPosition, zoom } = useMapLeaflet({
         zoomSetting,

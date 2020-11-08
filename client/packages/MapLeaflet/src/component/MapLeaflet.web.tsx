@@ -5,13 +5,13 @@ import {
   Marker,
   Popup,
 } from 'react-leaflet'
-import './MapLeaflet.css'
+import '../MapLeaflet.css'
 import { Icon } from 'leaflet'
 import { View } from 'react-native'
 
-import { useMapLeaflet } from './hooks'
-import { MapLeafletProps } from './types'
-import styles from './style'
+import { useMapLeaflet } from '../hooks'
+import { MapLeafletProps } from '../types'
+import styles from '../style'
 
 const MapLeaflet = ({
   markers = [],

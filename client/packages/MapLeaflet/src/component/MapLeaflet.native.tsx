@@ -5,9 +5,9 @@ import {
   WebviewLeafletMessage,
 } from '@trusohamn/react-native-webview-leaflet'
 import { View, Alert, Image } from 'react-native'
-import { useMapLeaflet } from './hooks'
-import { LatLngObject, MapLeafletProps } from './types'
-import styles from './style'
+import { useMapLeaflet } from '../hooks'
+import { LatLngObject, MapLeafletProps } from '../types'
+import styles from '../style'
 
 const MapLeaflet = ({
   markers = [],

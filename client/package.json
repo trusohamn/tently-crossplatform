@@ -6,7 +6,7 @@
     "web": "expo start --web",
     "start": "react-native start",
     "test": "jest",
-    "test-pack": "rm -rf /home/marta/Expo/TentlyCrossPlatform/client/node_modules/mapleaflet-reactwebnative && yarn add /home/marta/Expo/TentlyCrossPlatform/client/components/MapLeaflet"
+    "test-pack": "rm -rf /home/marta/Expo/TentlyCrossPlatform/client/node_modules/mapleaflet-reactwebnative && yarn add /home/marta/Expo/TentlyCrossPlatform/client/packages/MapLeaflet"
   },
   "dependencies": {
     "@trusohamn/react-native-webview-leaflet": "/home/marta/Github/react-native-webview-leaflet/WebViewLeaflet",
