@@ -1,6 +1,6 @@
 {
   "name": "mapleaflet-react-web-native",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Map leaflet component working both for react web and native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "tsc --project ./tsconfig.json ",
-    "pub": " npm publish --access public",
+    "pub": "npm publish --access public",
     "lint": "tslint --fix -p ./tsconfig.json",
     "prepare": "rm -rf /home/marta/Expo/TentlyCrossPlatform/client/packages/MapLeaflet/lib && yarn build && cp src/MapLeaflet.css lib/MapLeaflet.css"
   },
@@ -25,7 +25,14 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "react": "^16.9.0",
-    "react-native": "^0.61.2"
+    "react": "^16.9.0"
+  },
+  "dependencies": {
+    "@trusohamn/react-native-webview-leaflet": "^5.0.2",
+    "leaflet": "^1.7.1",
+    "react-leaflet": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/react-leaflet": "^2.5.2"
   }
 }

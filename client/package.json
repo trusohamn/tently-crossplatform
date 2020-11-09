@@ -6,27 +6,17 @@
     "web": "expo start --web",
     "start": "react-native start",
     "test": "jest",
-    "test-pack": "rm -rf /home/marta/Expo/TentlyCrossPlatform/client/node_modules/mapleaflet-reactwebnative && yarn add /home/marta/Expo/TentlyCrossPlatform/client/packages/MapLeaflet"
+    "test-pack": "rm -rf /home/marta/Expo/TentlyCrossPlatform/client/node_modules/mapleaflet-reactwebnative && yarn add /home/marta/Expo/TentlyCrossPlatform/client/packages/MapLeaflet",
+    "test-pack-npm": "yarn add mapleaflet-react-web-native"
   },
   "dependencies": {
-    "@trusohamn/react-native-webview-leaflet": "^5.0.2",
-    "@types/react-leaflet": "^2.5.2",
     "expo": "~38.0.9",
-    "expo-splash-screen": "^0.5.0",
-    "expo-status-bar": "^1.0.0",
     "expo-updates": "~0.2.8",
-    "leaflet": "^1.7.1",
-    "mapleaflet-react-web-native": "^1.0.8",
+    "mapleaflet-react-web-native": "^1.0.9",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
-    "react-leaflet": "^2.7.0",
     "react-native": "~0.62.2",
-    "react-native-gesture-handler": "~1.6.0",
-    "react-native-reanimated": "~1.9.0",
-    "react-native-screens": "~2.9.0",
-    "react-native-unimodules": "~0.10.0",
-    "react-native-web": "~0.11.7",
-    "react-native-webview-leaflet": "^5.0.2"
+    "react-native-web": "~0.11.7"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
