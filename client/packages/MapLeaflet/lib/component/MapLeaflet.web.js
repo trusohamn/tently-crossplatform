@@ -2,9 +2,7 @@ import React, { createRef } from 'react';
 import { Map as LeafletMap, TileLayer, Marker, Popup, } from 'react-leaflet';
 import '../MapLeaflet.css';
 import { Icon } from 'leaflet';
-import { View } from 'react-native';
 import { useMapLeaflet } from '../hooks';
-import styles from '../style';
 const MapLeaflet = ({ markers = [], zoom: zoomSetting, position: positionSetting, selectedPosition, setSelectedPosition, markerIcon, }) => {
     const { mapCenterPosition, zoom } = useMapLeaflet({
         zoomSetting,
@@ -17,24 +15,22 @@ const MapLeaflet = ({ markers = [], zoom: zoomSetting, position: positionSetting
             setSelectedPosition(marker.leafletElement.getLatLng());
         }
     };
-    return (<View style={styles.container}>
-      <LeafletMap center={mapCenterPosition} zoom={zoom} onclick={(e) => setSelectedPosition(e.latlng)}>
-        <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"/>
-        {!!selectedPosition && (<Marker position={selectedPosition} draggable={true} ondragend={updatePosition} ref={refmarker} icon={new Icon({
+    return (<LeafletMap center={mapCenterPosition} zoom={zoom} onclick={(e) => setSelectedPosition(e.latlng)}>
+      <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"/>
+      {!!selectedPosition && (<Marker position={selectedPosition} draggable={true} ondragend={updatePosition} ref={refmarker} icon={new Icon({
         iconUrl: markerIcon || ' ',
         iconSize: [32, 42],
     })}></Marker>)}
-        {markers.map((marker, id) => {
+      {markers.map((marker, id) => {
         return (<Marker key={id} position={marker.position} icon={new Icon({
             iconUrl: marker.icon || ' ',
             iconSize: marker.size,
         })}>
-              <Popup>
-                {marker.name} <br />
-              </Popup>
-            </Marker>);
+            <Popup>
+              {marker.name} <br />
+            </Popup>
+          </Marker>);
     })}
-      </LeafletMap>
-    </View>);
+    </LeafletMap>);
 };
 export default MapLeaflet;
