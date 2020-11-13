@@ -28,7 +28,7 @@ export default function App() {
   })
 
   const fetchData = async () => {
-    const mappedData = await fetchAllLocalisations()
+    const mappedData = (await fetchAllLocalisations()).data
     setMarkers(mappedData)
   }
 
