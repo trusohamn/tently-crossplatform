@@ -7648,21 +7648,14 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-mapleaflet-react-web-native@/home/marta/Github/mapleaflet-react-web-native/packages/MapLeaflet:
-  version "1.0.11"
+mapleaflet-react-web-native@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/mapleaflet-react-web-native/-/mapleaflet-react-web-native-1.0.12.tgz#44a8e32384314670cf7fa058dacf8880caf7dfe7"
+  integrity sha512-MjxG8VD3+SHxfkmE0EjthOgFTxCnHG39TVUE76ivh6OEuGjlrDAKZzy8iDqlsqKKU/FjTcRneBkXZc7p/TsbMQ==
   dependencies:
     "@trusohamn/react-native-webview-leaflet" "^5.0.2"
     leaflet "^1.7.1"
     react-leaflet "^3.0.2"
-
-mapleaflet-react-web-native@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/mapleaflet-react-web-native/-/mapleaflet-react-web-native-1.0.11.tgz#9129d1e7cb3bd349a36eb4911089598cf8affc88"
-  integrity sha512-b8RXs0DBMu3yQ+gzBFa7fzgB4GvhUQEHXFOOAH9VTM5imWxd9qauVjUlio4BYGSdhrsy6fZ55DpOdh992itD7w==
-  dependencies:
-    "@trusohamn/react-native-webview-leaflet" "^5.0.2"
-    leaflet "^1.7.1"
-    react-leaflet "^2.7.0"
 
 md5-file@^3.2.3:
   version "3.2.3"
@@ -9600,7 +9593,7 @@ react-is@^16.12.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-i
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-leaflet@^2.6.1, react-leaflet@^2.7.0:
+react-leaflet@^2.6.1:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-2.8.0.tgz#14bfc77b6ae8263d3a62e0ba7a39539c05973c6f"
   integrity sha512-Y7oHtNrrlRH8muDttXf+jZ2Ga/X7jneSGi1GN8uEdeCfLProTqgG2Zoa5TfloS3ZnY20v7w+DIenMG59beFsQw==
