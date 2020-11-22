@@ -12,7 +12,7 @@
   "dependencies": {
     "expo": "~38.0.9",
     "expo-updates": "~0.2.8",
-    "mapleaflet-react-web-native": "^1.0.11",
+    "mapleaflet-react-web-native": "/home/marta/Github/mapleaflet-react-web-native/packages/MapLeaflet",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-native": "~0.62.2",

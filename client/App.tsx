@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
-import { markerIcon } from './helpers/icons'
+import { selectorIcon } from './helpers/icons'
 import {
   fetchAllLocalisations,
   saveNewLocalisation,
@@ -50,9 +50,11 @@ export default function App() {
         <MapLeaflet
           markers={markers}
           zoom={9}
-          selectedPosition={selectedPosition}
-          setSelectedPosition={setSelectedPosition}
-          markerIcon={markerIcon}
+          locationSelector={{
+            selectedPosition,
+            setSelectedPosition,
+            selectorIcon,
+          }}
         ></MapLeaflet>
       </View>
       <View style={styles.form}>

@@ -9,4 +9,4 @@ export const mapIcons = (category: string) => {
   return iconMapping[category] || iconMapping.default
 }
 
-export { default as markerIcon } from '../assets/icons/marker.png'
+export { default as selectorIcon } from '../assets/icons/marker.png'
