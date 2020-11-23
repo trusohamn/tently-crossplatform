@@ -1,9 +1,15 @@
 import { service } from '../constants'
 import { mapIcons } from '../helpers/icons'
+import {
+  Location,
+  LocationInput,
+  LocationWithParams,
+  IconSize,
+} from '../types'
 
 export const fetchAllLocalisations = async () => {
   try {
-    const data = await fetch(service, {
+    const json = await fetch(service, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -11,25 +17,22 @@ export const fetchAllLocalisations = async () => {
       },
       body: JSON.stringify({
         query: `{getAllLocations {
-            id, category, name, position {
+            id, category, name, description, position {
               lat
               lng
             }
           }}`,
       }),
     }).then((data) => data.json())
+    const locations: Location[] = json.data.getAllLocations
+    const size: IconSize = [32, 32]
+    const data = locations.map((location) => ({
+      ...location,
+      size,
+      icon: mapIcons(location.category),
+    }))
     return {
-      data: data.data.getAllLocations.map(
-        (location: {
-          id: string
-          category: string
-          position: { lat: number; lng: number }
-        }) => ({
-          ...location,
-          size: [32, 32],
-          icon: mapIcons(location.category),
-        }),
-      ),
+      data,
     }
   } catch (error) {
     return { error, data: [] }
@@ -39,21 +42,19 @@ export const fetchAllLocalisations = async () => {
 export const saveNewLocalisation = async ({
   category,
   name,
-  selectedPosition,
-}: {
-  category: string
-  name: string
-  selectedPosition: { lat: number; lng: number }
-}) => {
+  position,
+  description,
+}: LocationInput) => {
   try {
     const mutation = `mutation {
       createLocation(location: {
         category: "${category}"
         name: "${name}"
         position: {
-          lat: ${selectedPosition.lat}
-          lng: ${selectedPosition.lng}
+          lat: ${position.lat}
+          lng: ${position.lng}
         }
+        description: "${description}"
       }) {
         id
       }

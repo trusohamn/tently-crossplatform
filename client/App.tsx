@@ -6,8 +6,8 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  Picker,
 } from 'react-native'
-import { Picker } from '@react-native-picker/picker'
 
 import { selectorIcon } from './helpers/icons'
 import {
@@ -16,9 +16,10 @@ import {
 } from './helpers/data'
 
 import MapLeaflet from 'mapleaflet-react-web-native'
+import { LocationWithParams } from './types'
 
 export default function App() {
-  const [markers, setMarkers] = useState([])
+  const [markers, setMarkers] = useState<LocationWithParams[]>([])
   const [category, setCategory] = useState('camping')
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -33,7 +34,12 @@ export default function App() {
   }
 
   const saveData = async () => {
-    await saveNewLocalisation({ category, name, selectedPosition })
+    await saveNewLocalisation({
+      category,
+      name,
+      position: selectedPosition,
+      description,
+    })
     fetchData()
   }
 

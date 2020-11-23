@@ -10,7 +10,6 @@
     "test-pack-npm": "yarn add mapleaflet-react-web-native"
   },
   "dependencies": {
-    "@react-native-picker/picker": "^1.9.2",
     "expo": "~38.0.9",
     "expo-updates": "~0.2.8",
     "mapleaflet-react-web-native": "^1.0.12",
