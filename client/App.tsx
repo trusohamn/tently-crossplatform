@@ -3,11 +3,11 @@ import {
   StyleSheet,
   Text,
   View,
-  Picker,
   TextInput,
   Button,
   TouchableOpacity,
 } from 'react-native'
+import { Picker } from '@react-native-picker/picker'
 
 import { selectorIcon } from './helpers/icons'
 import {
@@ -16,12 +16,12 @@ import {
 } from './helpers/data'
 
 import MapLeaflet from 'mapleaflet-react-web-native'
-// import MapLeaflet from './packages/MapLeaflet/src'
 
 export default function App() {
   const [markers, setMarkers] = useState([])
   const [category, setCategory] = useState('camping')
   const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
   const [selectedPosition, setSelectedPosition] = useState({
     lat: 59.5,
     lng: 18.0,
@@ -58,7 +58,12 @@ export default function App() {
         ></MapLeaflet>
       </View>
       <View style={styles.form}>
-        <Text style={styles.formTilte}> Add Location </Text>
+        <Text style={styles.formTilte}>
+          {' '}
+          Add Location at Lat: {selectedPosition.lat.toFixed(
+            2,
+          )} Lng: {selectedPosition.lng.toFixed(2)}
+        </Text>
         <View>
           <TextInput
             style={styles.formElements}
@@ -67,21 +72,28 @@ export default function App() {
             onChangeText={(newName) => setName(newName)}
             placeholderTextColor={'blue'}
           />
-          <Text style={styles.formElements}>
-            Position Lat: {selectedPosition.lat.toFixed(2)} Lng:
-            {selectedPosition.lng.toFixed(2)}
-          </Text>
-          <Picker
+          <TextInput
             style={styles.formElements}
-            selectedValue={category}
-            onValueChange={(currentcategory) =>
-              setCategory(currentcategory)
+            placeholder="Add description"
+            defaultValue={description}
+            onChangeText={(newDescription) =>
+              setDescription(newDescription)
             }
-          >
-            <Picker.Item label="camping" value="camping" />
-            <Picker.Item label="kayak" value="kayak" />
-            <Picker.Item label="hut" value="hut" />
-          </Picker>
+            placeholderTextColor={'blue'}
+          />
+          <View style={styles.formElements}>
+            <Text>select category:</Text>
+            <Picker
+              selectedValue={category}
+              onValueChange={(currentcategory) =>
+                setCategory(currentcategory.toString())
+              }
+            >
+              <Picker.Item label="camping" value="camping" />
+              <Picker.Item label="kayak" value="kayak" />
+              <Picker.Item label="hut" value="hut" />
+            </Picker>
+          </View>
         </View>
         <TouchableOpacity style={styles.formButton}>
           <Button title="Submit" onPress={saveData} />
