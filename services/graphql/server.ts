@@ -20,6 +20,7 @@ input LocationInput {
     position: PositionInput
     category: String
     name: String
+    description: String
 }
 
 type Location {
@@ -27,6 +28,7 @@ type Location {
     position: Position
     category: String
     name: String
+    description: String
 }
 
 type Query {
