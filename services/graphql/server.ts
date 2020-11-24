@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import express from 'express'
 import { graphqlHTTP } from 'express-graphql'
 import { buildSchema } from 'graphql'
