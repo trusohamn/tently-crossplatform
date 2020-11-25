@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@types/cors": "^2.8.7",
+    "apollo-server": "^2.19.0",
     "class-validator": "^0.12.2",
     "commonjs": "^0.0.1",
     "cors": "^2.8.5",
