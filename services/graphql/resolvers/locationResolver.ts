@@ -11,6 +11,7 @@ import {
 import db from '../db'
 
 @ObjectType()
+@InputType()
 class Position {
   @Field()
   lat: number
