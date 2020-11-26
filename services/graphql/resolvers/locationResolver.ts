@@ -19,7 +19,7 @@ class Position {
 }
 
 @ObjectType()
-class Location {
+export class Location {
   @Field()
   id: string
   @Field()

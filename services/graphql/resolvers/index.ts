@@ -1,1 +1,1 @@
-export { LocationResolver } from './locationResolver'
+export { LocationResolver, Location } from './locationResolver'
