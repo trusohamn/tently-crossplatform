@@ -3,7 +3,7 @@ import { ApolloServer } from 'apollo-server'
 import { buildSchema } from 'type-graphql'
 import { LocationResolver } from './resolvers'
 
-async function bootstrap() {
+const bootstrap = async () => {
   const schema = await buildSchema({
     resolvers: [LocationResolver],
   })
