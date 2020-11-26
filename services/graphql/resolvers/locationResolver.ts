@@ -8,7 +8,7 @@ import {
   Resolver,
 } from 'type-graphql'
 
-import db from './db'
+import db from '../db'
 
 @ObjectType()
 class Position {

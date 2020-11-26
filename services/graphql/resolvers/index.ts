@@ -1,0 +1,1 @@
+export { LocationResolver } from './locationResolver'

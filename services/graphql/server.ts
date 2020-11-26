@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { ApolloServer } from 'apollo-server'
 import { buildSchema } from 'type-graphql'
-import { LocationResolver } from './resolver'
+import { LocationResolver } from './resolvers'
 
 async function bootstrap() {
   const schema = await buildSchema({
