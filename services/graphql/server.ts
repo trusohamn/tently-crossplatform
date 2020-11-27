@@ -2,8 +2,10 @@ import 'reflect-metadata'
 import { ApolloServer } from 'apollo-server'
 import { buildSchema } from 'type-graphql'
 import { LocationResolver } from './resolvers'
+import { createConnection } from 'typeorm'
 
 const bootstrap = async () => {
+  await createConnection()
   const schema = await buildSchema({
     resolvers: [LocationResolver],
   })

@@ -1,17 +1,23 @@
 import {
   Arg,
   Field,
+  ID,
   InputType,
   Mutation,
   ObjectType,
   Query,
   Resolver,
 } from 'type-graphql'
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+} from 'typeorm'
 
 import db from '../db'
 
 @ObjectType()
-@InputType()
 class Position {
   @Field()
   lat: number
@@ -19,17 +25,27 @@ class Position {
   lng: number
 }
 
+@Entity()
 @ObjectType()
-export class Location {
-  @Field()
+export class Location extends BaseEntity {
+  @Field(() => ID)
+  @PrimaryGeneratedColumn()
   id: string
-  @Field()
+
+  @Column()
+  @Field(() => String)
   name: string
-  @Field()
+
+  @Column()
+  @Field(() => String)
   description: string
-  @Field()
+
+  @Column()
+  @Field(() => String)
   category: string
-  @Field()
+
+  @Column()
+  @Field(() => Position)
   position: Position
 }
 
@@ -57,21 +73,20 @@ class LocationInput {
 export class LocationResolver {
   @Query(() => Location)
   getLocation(@Arg('id') id: string) {
-    return db.find((location) => location.id === id)
+    return Location.findOne(id)
   }
 
   @Query(() => [Location])
   getAllLocations() {
-    return db
+    return Location.find()
   }
 
   @Mutation(() => Location)
-  createLocation(@Arg('location') location: LocationInput): Location {
-    const id: string = require('crypto')
-      .randomBytes(10)
-      .toString('hex')
-    const entry = { id, ...location }
-    db.push(entry)
-    return entry
+  async createLocation(
+    @Arg('location') location: LocationInput,
+  ): Promise<Location> {
+    const newLocation = Location.create(location)
+    await newLocation.save()
+    return newLocation
   }
 }
