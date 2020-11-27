@@ -1,53 +1,13 @@
 import {
   Arg,
   Field,
-  ID,
   InputType,
   Mutation,
-  ObjectType,
   Query,
   Resolver,
 } from 'type-graphql'
-import {
-  Entity,
-  BaseEntity,
-  PrimaryGeneratedColumn,
-  Column,
-} from 'typeorm'
 
-import db from '../db'
-
-@ObjectType()
-class Position {
-  @Field()
-  lat: number
-  @Field()
-  lng: number
-}
-
-@Entity()
-@ObjectType()
-export class Location extends BaseEntity {
-  @Field(() => ID)
-  @PrimaryGeneratedColumn()
-  id: string
-
-  @Column()
-  @Field(() => String)
-  name: string
-
-  @Column()
-  @Field(() => String)
-  description: string
-
-  @Column()
-  @Field(() => String)
-  category: string
-
-  @Column()
-  @Field(() => Position)
-  position: Position
-}
+import { Location } from '../models'
 
 @InputType()
 class PositionInput {
@@ -69,7 +29,7 @@ class LocationInput {
   position: PositionInput
 }
 
-@Resolver(Location)
+@Resolver()
 export class LocationResolver {
   @Query(() => Location)
   getLocation(@Arg('id') id: string) {

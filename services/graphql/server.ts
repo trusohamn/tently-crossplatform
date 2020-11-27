@@ -1,11 +1,20 @@
 import 'reflect-metadata'
 import { ApolloServer } from 'apollo-server'
 import { buildSchema } from 'type-graphql'
-import { LocationResolver } from './resolvers'
 import { createConnection } from 'typeorm'
 
+import { LocationResolver } from './resolvers'
+import { Location } from './models'
+
 const bootstrap = async () => {
-  await createConnection()
+  const connection = await createConnection({
+    type: 'sqlite',
+    database: './db.sqlite3',
+    entities: [Location],
+    synchronize: true,
+  })
+  console.log(connection)
+
   const schema = await buildSchema({
     resolvers: [LocationResolver],
   })
@@ -13,7 +22,6 @@ const bootstrap = async () => {
   const server = new ApolloServer({
     schema,
     cors: true,
-    playground: true,
   })
 
   const { url } = await server.listen(4000)
