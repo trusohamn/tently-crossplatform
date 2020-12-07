@@ -7,7 +7,7 @@
   "main": "dist/server.js",
   "scripts": {
     "start": "tsc && node dist/server.js",
-    "start-dev": "nodemon --ext ts --exec ts-node server.ts"
+    "start-dev": "nodemon --ext ts --exec ts-node src/server.ts"
   },
   "dependencies": {
     "apollo-server": "^2.19.0",

@@ -13,7 +13,6 @@ const bootstrap = async () => {
     entities: [Location],
     synchronize: true,
   })
-  console.log(connection)
 
   const schema = await buildSchema({
     resolvers: [LocationResolver],
