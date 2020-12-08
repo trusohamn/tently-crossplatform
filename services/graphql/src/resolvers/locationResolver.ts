@@ -38,13 +38,8 @@ export class LocationResolver {
   async createLocation(
     @Arg('location') location: LocationInput,
   ): Promise<Location | void> {
-    try {
-      const newLocation = Location.create(location)
-      await newLocation.save()
-      return newLocation
-    } catch (e) {
-      console.log(e)
-      return new Promise(() => {})
-    }
+    const newLocation = Location.create(location)
+    await newLocation.save()
+    return newLocation
   }
 }
