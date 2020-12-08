@@ -8,17 +8,6 @@ import {
 
 @Entity()
 @ObjectType()
-class Position {
-  @Column()
-  @Field()
-  lat: number
-
-  @Column()
-  @Field()
-  lng: number
-}
-
-@ObjectType()
 export class Location extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
@@ -37,6 +26,10 @@ export class Location extends BaseEntity {
   category: string
 
   @Column()
-  @Field(() => Position)
-  position: Position
+  @Field()
+  lat: number
+
+  @Column()
+  @Field()
+  lng: number
 }

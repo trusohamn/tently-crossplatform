@@ -7,7 +7,7 @@ import { LocationResolver } from './resolvers'
 import { Location } from './models'
 
 const bootstrap = async () => {
-  const connection = await createConnection({
+  await createConnection({
     type: 'sqlite',
     database: './db.sqlite3',
     entities: [Location],

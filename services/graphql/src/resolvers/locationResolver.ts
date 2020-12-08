@@ -8,15 +8,6 @@ import {
 } from 'type-graphql'
 
 import { Location } from '../models'
-
-@InputType()
-class PositionInput {
-  @Field()
-  lat: number
-  @Field()
-  lng: number
-}
-
 @InputType()
 class LocationInput {
   @Field()
@@ -26,7 +17,9 @@ class LocationInput {
   @Field()
   category: string
   @Field()
-  position: PositionInput
+  lat: number
+  @Field()
+  lng: number
 }
 
 @Resolver()
@@ -44,9 +37,14 @@ export class LocationResolver {
   @Mutation(() => Location)
   async createLocation(
     @Arg('location') location: LocationInput,
-  ): Promise<Location> {
-    const newLocation = Location.create(location)
-    await newLocation.save()
-    return newLocation
+  ): Promise<Location | void> {
+    try {
+      const newLocation = Location.create(location)
+      await newLocation.save()
+      return newLocation
+    } catch (e) {
+      console.log(e)
+      return new Promise(() => {})
+    }
   }
 }

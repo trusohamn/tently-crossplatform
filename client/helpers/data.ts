@@ -17,10 +17,7 @@ export const fetchAllLocalisations = async () => {
       },
       body: JSON.stringify({
         query: `{getAllLocations {
-            id, category, name, description, position {
-              lat
-              lng
-            }
+            id, category, name, description, lat, lng
           }}`,
       }),
     }).then((data) => data.json())
@@ -30,6 +27,7 @@ export const fetchAllLocalisations = async () => {
       ...location,
       size,
       icon: mapIcons(location.category),
+      position: { lat: location.lat, lng: location.lng },
     }))
     return {
       data,
@@ -50,10 +48,8 @@ export const saveNewLocalisation = async ({
       createLocation(location: {
         category: "${category}"
         name: "${name}"
-        position: {
-          lat: ${position.lat}
-          lng: ${position.lng}
-        }
+        lat: ${position.lat}
+        lng: ${position.lng}
         description: "${description}"
       }) {
         id
