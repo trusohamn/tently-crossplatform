@@ -1,11 +1,6 @@
 import { service } from '../constants'
 import { mapIcons } from '../helpers/icons'
-import {
-  Location,
-  LocationInput,
-  LocationWithParams,
-  IconSize,
-} from '../types'
+import { Location, LocationInput, IconSize } from '../types'
 
 export const fetchAllLocalisations = async () => {
   try {
@@ -48,8 +43,8 @@ export const saveNewLocalisation = async ({
       createLocation(location: {
         category: "${category}"
         name: "${name}"
-        lat: ${position.lat}
-        lng: ${position.lng}
+        lat: "${position.lat}"
+        lng: "${position.lng}"
         description: "${description}"
       }) {
         id

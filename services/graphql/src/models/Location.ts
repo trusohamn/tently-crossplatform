@@ -26,10 +26,10 @@ export class Location extends BaseEntity {
   category: string
 
   @Column()
-  @Field()
-  lat: number
+  @Field(() => String)
+  lat: string
 
   @Column()
-  @Field()
-  lng: number
+  @Field(() => String)
+  lng: string
 }

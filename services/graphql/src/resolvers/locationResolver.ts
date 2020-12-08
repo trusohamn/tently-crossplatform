@@ -17,9 +17,9 @@ class LocationInput {
   @Field()
   category: string
   @Field()
-  lat: number
+  lat: string
   @Field()
-  lng: number
+  lng: string
 }
 
 @Resolver()
