@@ -4,10 +4,10 @@ EXPOSE 4000 9229
 RUN mkdir -p /home/app
 WORKDIR /home/app
 
-COPY package.json tsconfig.json ./
+COPY package.json tsconfig.json yarn.lock ./
 
 RUN yarn install
 
 COPY src ./src
 
-CMD yarn start
+CMD yarn start-dev
