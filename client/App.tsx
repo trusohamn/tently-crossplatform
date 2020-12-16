@@ -19,6 +19,10 @@ import {
 import MapLeaflet from 'mapleaflet-react-web-native'
 import { LocationWithParams } from './types'
 
+const getAvailableCategories = (markers) => [
+  ...new Set(markers.map((marker) => marker.category)),
+]
+
 export default function App() {
   const [markers, setMarkers] = useState<LocationWithParams[]>([])
   const [category, setCategory] = useState('camping')
@@ -28,10 +32,19 @@ export default function App() {
     lat: 59.5,
     lng: 18.0,
   })
+  const [checked, setChecked] = useState({})
 
   const fetchData = async () => {
     const mappedData = (await fetchAllLocalisations()).data
     setMarkers(mappedData)
+    const checked = getAvailableCategories(mappedData).reduce(
+      (checked, category) => {
+        checked[category] = true
+        return checked
+      },
+      {},
+    )
+    setChecked(checked)
   }
 
   const saveData = async () => {
@@ -54,7 +67,20 @@ export default function App() {
         <Text style={styles.headerText}>Welcome to Tently!</Text>
       </View>
       <View>
-        <CheckBox center title="Click Here" checked={true} />
+        {getAvailableCategories(markers).map((category: string) => {
+          return (
+            <CheckBox
+              title={category}
+              checked={checked[category]}
+              onPress={() =>
+                setChecked({
+                  ...checked,
+                  [category]: !checked[category],
+                })
+              }
+            />
+          )
+        })}
       </View>
       <View style={styles.map}>
         <MapLeaflet
