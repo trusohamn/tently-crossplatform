@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Picker,
 } from 'react-native'
+import { CheckBox } from 'react-native-elements'
 
 import { selectorIcon } from './helpers/icons'
 import {
@@ -51,6 +52,9 @@ export default function App() {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Welcome to Tently!</Text>
+      </View>
+      <View>
+        <CheckBox center title="Click Here" checked={true} />
       </View>
       <View style={styles.map}>
         <MapLeaflet
