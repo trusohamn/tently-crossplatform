@@ -84,7 +84,9 @@ export default function App() {
       </View>
       <View style={styles.map}>
         <MapLeaflet
-          markers={markers}
+          markers={markers.filter(
+            (marker) => checked[marker.category],
+          )}
           zoom={9}
           locationSelector={{
             selectedPosition,
