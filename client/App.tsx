@@ -9,6 +9,7 @@ import {
   Picker,
 } from 'react-native'
 import { CheckBox } from 'react-native-elements'
+import { launchImageLibrary } from 'react-native-image-picker'
 
 import { selectorIcon } from './helpers/icons'
 import {
@@ -55,6 +56,26 @@ export default function App() {
       description,
     })
     fetchData()
+  }
+
+  const selectPhotoTapped = () => {
+    launchImageLibrary({ mediaType: 'photo' }, (response) => {
+      console.log('Response = ', response)
+      if (response.didCancel) {
+        console.log('User cancelled image picker')
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error)
+      } else {
+        const uri = response.uri
+        const type = response.type
+        const name = response.fileName
+        const source = {
+          uri,
+          type,
+          name,
+        }
+      }
+    })
   }
 
   useEffect(() => {
@@ -131,6 +152,12 @@ export default function App() {
               <Picker.Item label="kayak" value="kayak" />
               <Picker.Item label="hut" value="hut" />
             </Picker>
+          </View>
+          <View>
+            <Text>ImagePicker to Cloudinary</Text>
+            <TouchableOpacity onPress={selectPhotoTapped}>
+              <Text>Upload</Text>
+            </TouchableOpacity>
           </View>
         </View>
         <TouchableOpacity style={styles.formButton}>

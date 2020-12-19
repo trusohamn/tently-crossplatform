@@ -9707,6 +9707,11 @@ react-native-elements@^3.0.0-alpha.1:
     react-native-size-matters "^0.3.1"
     react-native-status-bar-height "^2.5.0"
 
+react-native-image-picker@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-3.1.1.tgz#1b0fb6cb07b5bad0caec94a2a9562a92de6dd32c"
+  integrity sha512-7ZtOjFzfnsguNimyO1O/aASK5YBAPPtKmfEqWGCdfOft6cWctaQGOhZgbyEa+zWq6y2NIxo7306IlaCs+PXkog==
+
 react-native-ratings@^7.3.0:
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/react-native-ratings/-/react-native-ratings-7.3.0.tgz#32e11e4ed944ba8adbbc995d601df3f131619b6f"
