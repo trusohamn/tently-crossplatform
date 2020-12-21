@@ -1,3 +1,4 @@
+import { isNullableType } from 'graphql'
 import {
   Arg,
   Field,
@@ -20,6 +21,8 @@ class LocationInput {
   lat: string
   @Field()
   lng: string
+  @Field({ nullable: true })
+  image: string
 }
 
 @Resolver()
@@ -38,6 +41,7 @@ export class LocationResolver {
   async createLocation(
     @Arg('location') location: LocationInput,
   ): Promise<Location | void> {
+    console.log(location)
     const newLocation = Location.create(location)
     await newLocation.save()
     return newLocation

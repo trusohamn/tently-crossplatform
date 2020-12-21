@@ -37,6 +37,7 @@ export const saveNewLocalisation = async ({
   name,
   position,
   description,
+  image,
 }: LocationInput) => {
   try {
     const mutation = `mutation {
@@ -46,6 +47,7 @@ export const saveNewLocalisation = async ({
         lat: "${position.lat}"
         lng: "${position.lng}"
         description: "${description}"
+        image: "${image}"
       }) {
         id
       }

@@ -35,8 +35,7 @@ export default function App() {
     lng: 18.0,
   })
   const [checked, setChecked] = useState({})
-
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState(undefined)
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -45,8 +44,6 @@ export default function App() {
       aspect: [4, 3],
       quality: 1,
     })
-
-    console.log(result)
 
     if (!result.cancelled) {
       setImage(result.uri)
@@ -72,6 +69,7 @@ export default function App() {
       name,
       position: selectedPosition,
       description,
+      image,
     })
     fetchData()
   }
@@ -83,10 +81,8 @@ export default function App() {
   useEffect(() => {
     ;(async () => {
       if (Platform.OS !== 'web') {
-        const {
-          status,
-        } = await ImagePicker.requestMediaLibraryPermissionsAsync()
-        if (status !== 'granted') {
+        const response = await ImagePicker.getCameraPermissionsAsync()
+        if (response.status !== 'granted') {
           alert(
             'Sorry, we need camera roll permissions to make this work!',
           )

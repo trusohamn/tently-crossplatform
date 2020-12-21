@@ -3,6 +3,7 @@ export type LocationInput = {
   category: string
   name: string
   description: string
+  image?: string
 }
 export type Location = LocationInput & {
   id: string
