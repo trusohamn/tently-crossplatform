@@ -7,9 +7,10 @@ import {
   Button,
   TouchableOpacity,
   Picker,
+  Platform,
 } from 'react-native'
 import { CheckBox } from 'react-native-elements'
-import { launchImageLibrary } from 'react-native-image-picker'
+import * as ImagePicker from 'expo-image-picker'
 
 import { selectorIcon } from './helpers/icons'
 import {
@@ -35,6 +36,23 @@ export default function App() {
   })
   const [checked, setChecked] = useState({})
 
+  const [image, setImage] = useState(null)
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    })
+
+    console.log(result)
+
+    if (!result.cancelled) {
+      setImage(result.uri)
+    }
+  }
+
   const fetchData = async () => {
     const mappedData = (await fetchAllLocalisations()).data
     setMarkers(mappedData)
@@ -58,28 +76,23 @@ export default function App() {
     fetchData()
   }
 
-  const selectPhotoTapped = () => {
-    launchImageLibrary({ mediaType: 'photo' }, (response) => {
-      console.log('Response = ', response)
-      if (response.didCancel) {
-        console.log('User cancelled image picker')
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error)
-      } else {
-        const uri = response.uri
-        const type = response.type
-        const name = response.fileName
-        const source = {
-          uri,
-          type,
-          name,
-        }
-      }
-    })
-  }
-
   useEffect(() => {
     fetchData()
+  }, [])
+
+  useEffect(() => {
+    ;(async () => {
+      if (Platform.OS !== 'web') {
+        const {
+          status,
+        } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+        if (status !== 'granted') {
+          alert(
+            'Sorry, we need camera roll permissions to make this work!',
+          )
+        }
+      }
+    })()
   }, [])
 
   return (
@@ -155,7 +168,7 @@ export default function App() {
           </View>
           <View>
             <Text>ImagePicker to Cloudinary</Text>
-            <TouchableOpacity onPress={selectPhotoTapped}>
+            <TouchableOpacity onPress={pickImage}>
               <Text>Upload</Text>
             </TouchableOpacity>
           </View>

@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "expo": "~38.0.9",
-    "expo-image-picker": "^9.2.1",
+    "expo-image-picker": "~8.3.0",
     "expo-updates": "~0.2.8",
     "mapleaflet-react-web-native": "^1.0.13",
     "react": "~16.11.0",
