@@ -1,4 +1,5 @@
-import { isNullableType } from 'graphql'
+import { v2 as cloudinary } from 'cloudinary'
+
 import {
   Arg,
   Field,
@@ -41,8 +42,19 @@ export class LocationResolver {
   async createLocation(
     @Arg('location') location: LocationInput,
   ): Promise<Location | void> {
-    console.log(location)
-    const newLocation = Location.create(location)
+    let uploadResponse
+    if (location.image) {
+      uploadResponse = await cloudinary.uploader.upload(
+        location.image,
+        {},
+      )
+    }
+    console.log(uploadResponse)
+    const locationToSave = {
+      ...location,
+      imageUrl: uploadResponse?.url,
+    }
+    const newLocation = Location.create(locationToSave)
     await newLocation.save()
     return newLocation
   }

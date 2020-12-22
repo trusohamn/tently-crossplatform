@@ -5,8 +5,15 @@ import { buildSchema } from 'type-graphql'
 import { createConnection } from 'typeorm'
 import { LocationResolver } from './resolvers'
 import { Location } from './models'
+import { v2 as cloudinary } from 'cloudinary'
 
 const bootstrap = async () => {
+  cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET,
+  })
+
   await createConnection({
     username: process.env.DB_USERNAME,
     host: process.env.DB_HOST,

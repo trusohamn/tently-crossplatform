@@ -32,4 +32,8 @@ export class Location extends BaseEntity {
   @Column()
   @Field(() => String)
   lng: string
+
+  @Column({ nullable: true })
+  @Field(() => String, { nullable: true })
+  imageUrl: string
 }

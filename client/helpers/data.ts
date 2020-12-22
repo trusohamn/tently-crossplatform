@@ -12,7 +12,7 @@ export const fetchAllLocalisations = async () => {
       },
       body: JSON.stringify({
         query: `{getAllLocations {
-            id, category, name, description, lat, lng
+            id, category, name, description, lat, lng, imageUrl
           }}`,
       }),
     }).then((data) => data.json())
