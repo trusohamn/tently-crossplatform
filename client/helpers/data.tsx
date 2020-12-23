@@ -33,7 +33,6 @@ export const fetchAllLocalisations = async () => {
         )
       },
     }))
-    console.log(data)
     return {
       data,
     }
