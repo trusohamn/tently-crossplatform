@@ -7705,10 +7705,17 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-mapleaflet-react-web-native@^1.0.13:
+mapleaflet-react-web-native@/home/marta/Github/mapleaflet-react-web-native/packages/MapLeaflet:
   version "1.0.13"
-  resolved "https://registry.yarnpkg.com/mapleaflet-react-web-native/-/mapleaflet-react-web-native-1.0.13.tgz#c4c374703920edac3a906e334d0e95938920ab11"
-  integrity sha512-DpIspnzGime/lHr3cOsjLKDQ9kBS/pLdp0CovsMb7oqiS4R1nPnYEoxL3kUVR5DStRTG+Lj+uURNoRzMhh8O+Q==
+  dependencies:
+    "@trusohamn/react-native-webview-leaflet" "^5.0.2"
+    leaflet "^1.7.1"
+    leaflet.markercluster "^1.4.1"
+    react-leaflet "^3.0.2"
+    react-leaflet-markercluster "^3.0.0-rc1"
+
+"mapleaflet-react-web-native@file:../../../Github/mapleaflet-react-web-native/packages/MapLeaflet":
+  version "1.0.13"
   dependencies:
     "@trusohamn/react-native-webview-leaflet" "^5.0.2"
     leaflet "^1.7.1"

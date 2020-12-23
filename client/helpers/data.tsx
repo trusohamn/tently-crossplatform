@@ -1,5 +1,7 @@
+import React from 'react'
+import { Text, View } from 'react-native'
 import { service } from '../constants'
-import { mapIcons } from '../helpers/icons'
+import { mapIcons } from './icons'
 import { Location, LocationInput, IconSize } from '../types'
 
 export const fetchAllLocalisations = async () => {
@@ -23,7 +25,15 @@ export const fetchAllLocalisations = async () => {
       size,
       icon: mapIcons(location.category),
       position: { lat: location.lat, lng: location.lng },
+      Popup: () => {
+        return (
+          <View>
+            <Text>{location.name}</Text>
+          </View>
+        )
+      },
     }))
+    console.log(data)
     return {
       data,
     }
