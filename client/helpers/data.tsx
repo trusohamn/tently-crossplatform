@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, Image, StyleSheet } from 'react-native'
 import { service } from '../constants'
 import { mapIcons } from './icons'
 import { Location, LocationInput, IconSize } from '../types'
@@ -28,7 +28,12 @@ export const fetchAllLocalisations = async () => {
       Popup: () => {
         return (
           <View>
-            <Text>{location.name}</Text>
+            <Text style={styles.title}>{location.name}</Text>
+            <Text>{location.description}</Text>
+            <Image
+              style={styles.logo}
+              source={{ uri: location.imageUrl }}
+            ></Image>
           </View>
         )
       },
@@ -74,3 +79,13 @@ export const saveNewLocalisation = async ({
     return { error, data: null }
   }
 }
+
+const styles = StyleSheet.create({
+  logo: {
+    width: 100,
+    height: 100,
+  },
+  title: {
+    fontSize: 25,
+  },
+})

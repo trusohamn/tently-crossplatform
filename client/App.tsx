@@ -163,9 +163,8 @@ export default function App() {
             </Picker>
           </View>
           <View>
-            <Text>ImagePicker to Cloudinary</Text>
             <TouchableOpacity onPress={pickImage}>
-              <Text>Upload</Text>
+              <Text>Upload photo</Text>
             </TouchableOpacity>
           </View>
         </View>
