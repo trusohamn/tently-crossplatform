@@ -26,13 +26,17 @@ export const fetchAllLocalisations = async () => {
       icon: mapIcons(location.category),
       position: { lat: location.lat, lng: location.lng },
       Popup: () => {
+        //TODO extract into function
+        const fullUrl = location.imageUrl.split('/')
+        fullUrl[fullUrl.length - 2] = 'w_100,h_100'
+        const modifiedImageUrl = fullUrl.join('/')
         return (
           <View>
             <Text style={styles.title}>{location.name}</Text>
             <Text>{location.description}</Text>
             <Image
               style={styles.logo}
-              source={{ uri: location.imageUrl }}
+              source={{ uri: modifiedImageUrl }}
             ></Image>
           </View>
         )
