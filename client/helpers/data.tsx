@@ -4,6 +4,19 @@ import { service } from '../constants'
 import { mapIcons } from './icons'
 import { Location, LocationInput, IconSize } from '../types'
 
+const getCloudinaryImageWithDimensions = (
+  imageUrl: string,
+  height: number,
+  width: number,
+) => {
+  const urlArray = imageUrl.split('/')
+  urlArray[urlArray.length - 2] = `w_${width},h_${height}`
+  return urlArray.join('/')
+}
+
+const iconHeight = 100
+const iconWidth = 100
+
 export const fetchAllLocalisations = async () => {
   try {
     const json = await fetch(service, {
@@ -26,17 +39,19 @@ export const fetchAllLocalisations = async () => {
       icon: mapIcons(location.category),
       position: { lat: location.lat, lng: location.lng },
       Popup: () => {
-        //TODO extract into function
-        const fullUrl = location.imageUrl.split('/')
-        fullUrl[fullUrl.length - 2] = 'w_100,h_100'
-        const modifiedImageUrl = fullUrl.join('/')
         return (
           <View>
             <Text style={styles.title}>{location.name}</Text>
             <Text>{location.description}</Text>
             <Image
               style={styles.logo}
-              source={{ uri: modifiedImageUrl }}
+              source={{
+                uri: getCloudinaryImageWithDimensions(
+                  location.imageUrl,
+                  iconHeight,
+                  iconWidth,
+                ),
+              }}
             ></Image>
           </View>
         )
@@ -86,8 +101,8 @@ export const saveNewLocalisation = async ({
 
 const styles = StyleSheet.create({
   logo: {
-    width: 100,
-    height: 100,
+    width: iconWidth,
+    height: iconHeight,
   },
   title: {
     fontSize: 25,
