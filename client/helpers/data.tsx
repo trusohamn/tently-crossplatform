@@ -43,16 +43,18 @@ export const fetchAllLocalisations = async () => {
           <View>
             <Text style={styles.title}>{location.name}</Text>
             <Text>{location.description}</Text>
-            <Image
-              style={styles.logo}
-              source={{
-                uri: getCloudinaryImageWithDimensions(
-                  location.imageUrl,
-                  iconHeight,
-                  iconWidth,
-                ),
-              }}
-            ></Image>
+            {!!location.imageUrl && (
+              <Image
+                style={styles.logo}
+                source={{
+                  uri: getCloudinaryImageWithDimensions(
+                    location.imageUrl,
+                    iconHeight,
+                    iconWidth,
+                  ),
+                }}
+              ></Image>
+            )}
           </View>
         )
       },

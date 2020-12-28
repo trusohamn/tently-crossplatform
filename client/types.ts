@@ -7,6 +7,7 @@ export type LocationInput = {
 }
 export type Location = LocationInput & {
   id: string
+  imageUrl?: string
 }
 
 export type LocationWithParams = Location & {
