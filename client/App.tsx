@@ -11,15 +11,14 @@ import {
 } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 import * as ImagePicker from 'expo-image-picker'
+import MapLeaflet from 'mapleaflet-react-web-native'
 
-import { selectorIcon } from './helpers/icons'
 import {
   fetchAllLocalisations,
   saveNewLocalisation,
 } from './helpers/data'
-
-import MapLeaflet from 'mapleaflet-react-web-native'
-import { LocationWithParams } from './types'
+import { selectorIcon } from './helpers/icons'
+import { LocationWithParams, CheckedCategories } from './types'
 
 const getAvailableCategories = (markers: LocationWithParams[]) => [
   ...new Set(markers.map((marker) => marker.category)),
@@ -34,8 +33,11 @@ export default function App() {
     lat: 59.5,
     lng: 18.0,
   })
-  const [checked, setChecked] = useState({})
-  const [image, setImage] = useState(undefined)
+  const [
+    checkedCategories,
+    setCheckedCategories,
+  ] = useState<CheckedCategories>({})
+  const [image, setImage] = useState<string | undefined>()
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -53,14 +55,13 @@ export default function App() {
   const fetchData = async () => {
     const mappedData = (await fetchAllLocalisations()).data
     setMarkers(mappedData)
-    const checked = getAvailableCategories(mappedData).reduce(
-      (checked, category) => {
-        checked[category] = true
-        return checked
-      },
-      {},
-    )
-    setChecked(checked)
+    const checkedCategories = getAvailableCategories(
+      mappedData,
+    ).reduce<CheckedCategories>((checked, category) => {
+      checked[category] = true
+      return checked
+    }, {})
+    setCheckedCategories(checkedCategories)
   }
 
   const saveData = async () => {
@@ -101,11 +102,11 @@ export default function App() {
           return (
             <CheckBox
               title={category}
-              checked={checked[category]}
+              checked={checkedCategories[category]}
               onPress={() =>
-                setChecked({
-                  ...checked,
-                  [category]: !checked[category],
+                setCheckedCategories({
+                  ...checkedCategories,
+                  [category]: !checkedCategories[category],
                 })
               }
             />
@@ -115,7 +116,7 @@ export default function App() {
       <View style={styles.map}>
         <MapLeaflet
           markers={markers.filter(
-            (marker) => checked[marker.category],
+            (marker) => checkedCategories[marker.category],
           )}
           zoom={9}
           locationSelector={{

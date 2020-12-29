@@ -22,3 +22,7 @@ export type LocationWithParams = LocationInput & {
 }
 
 export type IconSize = [number, number]
+
+export type CheckedCategories = {
+  [key: string]: boolean
+}
