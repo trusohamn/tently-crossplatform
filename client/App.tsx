@@ -21,7 +21,7 @@ import {
 import MapLeaflet from 'mapleaflet-react-web-native'
 import { LocationWithParams } from './types'
 
-const getAvailableCategories = (markers) => [
+const getAvailableCategories = (markers: LocationWithParams[]) => [
   ...new Set(markers.map((marker) => marker.category)),
 ]
 

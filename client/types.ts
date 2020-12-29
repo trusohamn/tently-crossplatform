@@ -16,7 +16,7 @@ export type LocationOutput = Location & {
   lng: number
 }
 
-export type LocationWithParams = Location & {
+export type LocationWithParams = LocationInput & {
   size: IconSize
   icon: any
 }
