@@ -1,13 +1,19 @@
-export type LocationInput = {
-  position: { lat: number; lng: number }
+type Location = {
   category: string
   name: string
   description: string
+}
+
+export type LocationInput = Location & {
+  position: { lat: number; lng: number }
   image?: string
 }
-export type Location = LocationInput & {
+
+export type LocationOutput = Location & {
   id: string
   imageUrl?: string
+  lat: number
+  lng: number
 }
 
 export type LocationWithParams = Location & {

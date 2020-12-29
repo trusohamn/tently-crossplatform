@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, View, Image, StyleSheet } from 'react-native'
 import { service } from '../constants'
 import { mapIcons } from './icons'
-import { Location, LocationInput, IconSize } from '../types'
+import { LocationOutput, LocationInput, IconSize } from '../types'
 
 const getCloudinaryImageWithDimensions = (
   imageUrl: string,
@@ -31,7 +31,7 @@ export const fetchAllLocalisations = async () => {
           }}`,
       }),
     }).then((data) => data.json())
-    const locations: Location[] = json.data.getAllLocations
+    const locations: LocationOutput[] = json.data.getAllLocations
     const size: IconSize = [32, 32]
     const data = locations.map((location) => ({
       ...location,
