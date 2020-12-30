@@ -103,6 +103,10 @@ export default function App() {
           return (
             <View style={styles.legendEntry}>
               <CheckBox
+                containerStyle={{
+                  backgroundColor: 'transparent',
+                  borderWidth: 0,
+                }}
                 title={category}
                 checked={checkedCategories[category]}
                 onPress={() =>
