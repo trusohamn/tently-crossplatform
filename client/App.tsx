@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Picker,
   Platform,
+  Image,
 } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 import * as ImagePicker from 'expo-image-picker'
@@ -17,7 +18,7 @@ import {
   fetchAllLocalisations,
   saveNewLocalisation,
 } from './helpers/data'
-import { selectorIcon } from './helpers/icons'
+import { selectorIcon, mapIcons } from './helpers/icons'
 import { LocationWithParams, CheckedCategories } from './types'
 
 const getAvailableCategories = (markers: LocationWithParams[]) => [
@@ -100,16 +101,22 @@ export default function App() {
       <View>
         {getAvailableCategories(markers).map((category: string) => {
           return (
-            <CheckBox
-              title={category}
-              checked={checkedCategories[category]}
-              onPress={() =>
-                setCheckedCategories({
-                  ...checkedCategories,
-                  [category]: !checkedCategories[category],
-                })
-              }
-            />
+            <View style={styles.legendEntry}>
+              <CheckBox
+                title={category}
+                checked={checkedCategories[category]}
+                onPress={() =>
+                  setCheckedCategories({
+                    ...checkedCategories,
+                    [category]: !checkedCategories[category],
+                  })
+                }
+              />
+              <Image
+                style={styles.imageLegend}
+                source={mapIcons(category)}
+              />
+            </View>
           )
         })}
       </View>
@@ -217,4 +224,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   formTilte: { fontSize: 20, fontWeight: 'bold', color: '#062542' },
+  legendEntry: { flex: 1, flexDirection: 'row' },
+  imageLegend: {
+    width: 30,
+    height: 30,
+  },
 })
