@@ -1,21 +1,8 @@
 import React from 'react'
-import { Text, View, Image, StyleSheet } from 'react-native'
 import { service } from '../constants'
 import { mapIcons } from './icons'
 import { LocationOutput, LocationInput, IconSize } from '../types'
-
-const getCloudinaryImageWithDimensions = (
-  imageUrl: string,
-  height: number,
-  width: number,
-) => {
-  const urlArray = imageUrl.split('/')
-  urlArray[urlArray.length - 2] = `w_${width},h_${height}`
-  return urlArray.join('/')
-}
-
-const iconHeight = 100
-const iconWidth = 100
+import Popup from '../components/Popup'
 
 export const fetchAllLocalisations = async () => {
   try {
@@ -40,22 +27,11 @@ export const fetchAllLocalisations = async () => {
       position: { lat: location.lat, lng: location.lng },
       Popup: () => {
         return (
-          <View>
-            <Text style={styles.title}>{location.name}</Text>
-            <Text>{location.description}</Text>
-            {!!location.imageUrl && (
-              <Image
-                style={styles.logo}
-                source={{
-                  uri: getCloudinaryImageWithDimensions(
-                    location.imageUrl,
-                    iconHeight,
-                    iconWidth,
-                  ),
-                }}
-              ></Image>
-            )}
-          </View>
+          <Popup
+            title={location.name}
+            description={location.description}
+            imageUrl={location.imageUrl}
+          />
         )
       },
     }))
@@ -100,13 +76,3 @@ export const saveNewLocalisation = async ({
     return { error, data: null }
   }
 }
-
-const styles = StyleSheet.create({
-  logo: {
-    width: iconWidth,
-    height: iconHeight,
-  },
-  title: {
-    fontSize: 25,
-  },
-})
