@@ -1,5 +1,11 @@
-import React from 'react'
-import { Text, View, Image, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  TouchableHighlight,
+} from 'react-native'
 
 const iconHeight = 100
 const iconWidth = 100
@@ -23,6 +29,7 @@ function Popup({
   description: string
   imageUrl?: string
 }) {
+  const [isShowingReviews, setIsShowingReviews] = useState(false)
   return (
     <View>
       <Text style={styles.title}>{title}</Text>
@@ -39,6 +46,14 @@ function Popup({
           }}
         ></Image>
       )}
+      <TouchableHighlight
+        style={{ ...styles.button, backgroundColor: '#2196F3' }}
+        onPress={() => {
+          console.log(false)
+        }}
+      >
+        <Text style={styles.textStyle}>Reviews</Text>
+      </TouchableHighlight>
     </View>
   )
 }
@@ -50,6 +65,17 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
+  },
+  button: {
+    backgroundColor: '#F194FF',
+    borderRadius: 40,
+    padding: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 })
 
